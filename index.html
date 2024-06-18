@@ -6,14 +6,39 @@
     <link rel="icon" href="./img/poken.png" type="image/png">
     <title>Pokédex</title>
     <link rel="stylesheet" href="./css/style.css">
-    <script src="./javaScript/pokem.js"></script>
+    <script src="./javaScript/pokem.js" defer></script>
 </head>
 <body>
     <header>
         <h1>Pokédex</h1><!-- Título de la página -->
         <nav><!-- Elemento de navegación -->
-            <a href="./index.html">Pokédex</a><!-- Enlace al Pokédex -->
-            <a href="">Mis Acompañantes</a><!-- Enlace hacia los acompañantes-->
+            <ul class="nav_horizontal">
+                <li>
+                    <a href="#">Pokédex</a><!-- Enlace al Pokédex -->
+                    <ul class="nav_vertical"><!-- Lista de Pokédex -->
+                        <li><a href="#">Ver todos</a></li>
+                        <li class="normal"><a href="#">Normal</a></li>
+                        <li class="fire"><a href="#">Fire</a></li>
+                        <li class="water"><a href="#">Water</a></li>
+                        <li class="grass"><a href="#">Grass</a></li>
+                        <li class="electric"><a href="#">Electric</a></li>
+                        <li class="ice"><a href="#">Ice</a></li>
+                        <li class="fighting"><a href="#">Fighting</a></li>
+                        <li class="poison"><a href="#">Poison</a></li>
+                        <li class="ground"><a href="#">Ground</a></li>
+                        <li class="flying"><a href="#">Flying</a></li>
+                        <li class="psychic"><a href="#">Psychic</a></li>
+                        <li class="bug"><a href="#">Bug</a></li>
+                        <li class="rock"><a href="#">Rock</a></li>
+                        <li class="ghost"><a href="#">Ghost</a></li>
+                        <li class="dark"><a href="#">Dark</a></li>
+                        <li class="dragon"><a href="#">Dragon</a></li>
+                        <li class="steel"><a href="#">Steel</a></li>
+                        <li class="fairy"><a href="#">Fairy</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Mis Acompañantes</a></li><!-- Enlace hacia los acompañantes-->
+            </ul>
         </nav>
     </header>
     <main>

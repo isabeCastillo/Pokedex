@@ -13,7 +13,7 @@ header {
 
 header h1 {
     margin: 0;
-    text-shadow: 0 0 9px rgb(1, 32, 170), 0 0 9px rgb(255, 0, 0), 0 0 9px rgb(1, 32, 170);/* Añade un efecto de sombra multicolor al texto */
+    text-shadow: 0 0 9px rgb(1, 32, 170), 0 0 9px rgb(255, 0, 0), 0 0 9px rgb(1, 32, 170);
     color: #ffd900;
 }
 
@@ -21,15 +21,137 @@ nav a {
     margin: 0 15px;
     text-decoration: none;
     color: #ffd900;
-    text-shadow: 0 0 5px rgb(1, 32, 170), 0 0 5px rgb(255, 0, 0), 0 0 5px rgb(1, 32, 170);/* Añade un efecto de sombra multicolor al texto */
-    padding: 5px 10px; /* Añade un relleno para que el enlace sea más grande */
-    transition: color 0.3s ease, background-color 0.3s ease; /* Añade transición */
+    text-shadow: 0 0 5px rgb(1, 32, 170), 0 0 5px rgb(255, 0, 0), 0 0 5px rgb(1, 32, 170);
+    padding: 5px 10px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    list-style: none;
 }
 
 nav a:hover {
-    color: #ffffff; /* Cambia el color del texto al pasar el cursor por encima */
-    background-color: #ffd900c7; /* Cambia el color de fondo al pasar el cursor por encima */
-    border-radius: 7px; /* Hace que los bordes sean ligeramente redondeados (opcional) */
+    color: #ffffff;
+    background-color: #ffd900c7;
+    border-radius: 7px;
+}
+
+.nav_horizontal {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    padding: 0;
+    margin: 0;
+}
+
+.nav_horizontal li {
+    position: relative;
+}
+
+.nav_vertical {
+    list-style: none;
+    position: absolute;
+    display: none;
+    top: 100%;
+    left: 0;
+    width: 150px;
+    max-height: 400px; /* Establece una altura máxima para el scroll */
+    overflow-y: auto; /* Habilita el scroll vertical cuando el contenido excede la altura máxima */
+    background-color: #ffcc00;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    scrollbar-color: #0000009c #636363;/*color del scroll*/
+    scrollbar-width: thin;
+}
+
+.nav_horizontal li:hover .nav_vertical {
+    display: block;
+}
+
+.nav_vertical li {
+    padding: 8px;
+}
+
+.nav_vertical li a {
+    display: block;
+    padding: 8px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.nav_vertical li.normal {
+    background-color: #A8A77A;
+}
+
+.nav_vertical li.fire {
+    background-color: #EE8130;
+}
+
+.nav_vertical li.water {
+    background-color: #6390F0;
+}
+
+.nav_vertical li.grass {
+    background-color: #7AC74C;
+}
+
+.nav_vertical li.electric {
+    background-color: #F7D02C;
+}
+
+.nav_vertical li.ice {
+    background-color: #96D9D6;
+}
+
+.nav_vertical li.fighting {
+    background-color: #C22E28;
+}
+
+.nav_vertical li.poison {
+    background-color: #A33EA1;
+}
+
+.nav_vertical li.ground {
+    background-color: #E2BF65;
+}
+
+.nav_vertical li.flying {
+    background-color: #A98FF3;
+}
+
+.nav_vertical li.psychic {
+    background-color: #F95587;
+}
+
+.nav_vertical li.bug {
+    background-color: #A6B91A;
+}
+
+.nav_vertical li.rock {
+    background-color: #B6A136;
+}
+
+.nav_vertical li.ghost {
+    background-color: #735797;
+}
+
+.nav_vertical li.dark {
+    background-color: #705746;
+}
+
+.nav_vertical li.dragon {
+    background-color: #6F35FC;
+}
+
+.nav_vertical li.steel {
+    background-color: #B7B7CE;
+}
+
+.nav_vertical li.fairy {
+    background-color: #D685AD;
+}
+
+.nav_vertical li a:hover {
+    background-color: inherit;/* Hereda el color de fondo del elemento li */
 }
 
 .pokedex, .acompañantes {
