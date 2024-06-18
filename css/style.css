@@ -1,0 +1,40 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #ffcc00;
+    padding: 10px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    text-shadow: 0 0 9px rgb(1, 32, 170), 0 0 9px rgb(255, 0, 0), 0 0 9px rgb(1, 32, 170);/* Añade un efecto de sombra multicolor al texto */
+    color: #ffd900;
+}
+
+nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #ffd900;
+    text-shadow: 0 0 5px rgb(1, 32, 170), 0 0 5px rgb(255, 0, 0), 0 0 5px rgb(1, 32, 170);/* Añade un efecto de sombra multicolor al texto */
+    padding: 5px 10px; /* Añade un relleno para que el enlace sea más grande */
+    transition: color 0.3s ease, background-color 0.3s ease; /* Añade transición */
+}
+
+nav a:hover {
+    color: #ffffff; /* Cambia el color del texto al pasar el cursor por encima */
+    background-color: #ffd900c7; /* Cambia el color de fondo al pasar el cursor por encima */
+    border-radius: 7px; /* Hace que los bordes sean ligeramente redondeados (opcional) */
+}
+
+.pokedex, .acompañantes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
