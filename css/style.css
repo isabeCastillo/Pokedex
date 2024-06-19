@@ -12,11 +12,21 @@ header {
     display: flex;
     align-items: center; /* Centra verticalmente los elementos dentro del header */
     justify-content: space-between; /* Distribuye espacio entre los elementos del header */
+
 }
 header #logo {
     width: 80px; /* Ajusta el ancho según sea necesario */
     height: 80px; /* Altura automática para mantener la proporción */
     margin-right: 10px; /* Espacio entre el logo y el título */
+}
+
+
+
+header h1 {
+    margin: 0;
+    text-shadow: 0 0 9px rgb(1, 32, 170), 0 0 9px rgb(255, 0, 0), 0 0 9px rgb(1, 32, 170);
+    color: #ffd900;
+    font-size: 24px; /* Ajusta el tamaño del texto según sea necesario */
 }
 
 
