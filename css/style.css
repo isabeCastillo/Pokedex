@@ -15,11 +15,11 @@ body {
     text-align: justify; /* Alineación justificada del texto */
     max-width: 800px; /* Ancho máximo del contenido */
     margin: 0 auto; /* Centrado horizontal del contenido */
-    padding: 30px; /* Espacio interno */
+    padding: 20px; /* Espacio interno */
 }
 
 #Inicio p {
-    margin-bottom: 40px; /* Espacio inferior */
+    margin-bottom: 20px; /* Espacio inferior */
 }
 
 
@@ -200,9 +200,11 @@ nav a:hover {
 
 /* Estilos para la imagen hero */
 #Inicio img {
-    max-width: 80%; /* Reducir el tamaño máximo de la imagen */
-    float: center; /* Alinear la imagen a la derecha */
-    margin-left: 100px; /* Espacio entre el texto y la imagen */
+    max-width: 40%; /* Reducir el tamaño máximo de la imagen */
+    display: block; /* Asegurar que la imagen se comporte como un bloque */
+    margin: 30px auto; /* Espacio superior e inferior para bajar la imagen */
+    float: center; /* Alinear la imagen al centro */
+    margin-left: 200px; /* Espacio entre el texto y la imagen */
     margin-bottom: 20px; /* Espacio inferior */
 }
 
