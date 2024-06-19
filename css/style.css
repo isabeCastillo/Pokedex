@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: black;
     margin: 0;
     padding: 0;
 }
@@ -8,19 +8,28 @@ body {
 header {
     background-color: #ffcc00;
     padding: 10px;
-    text-align: center;
+    text-align: left; /* Cambia el texto a la izquierda */
+    display: flex;
+    align-items: center; /* Centra verticalmente los elementos dentro del header */
+    justify-content: space-between; /* Distribuye espacio entre los elementos del header */
 }
 
 header h1 {
     margin: 0;
     text-shadow: 0 0 9px rgb(1, 32, 170), 0 0 9px rgb(255, 0, 0), 0 0 9px rgb(1, 32, 170);
     color: #ffd900;
+    font-size: 24px; /* Ajusta el tamaño del texto según sea necesario */
+}
+
+nav {
+    display: flex; /* Flexbox para el nav */
+    align-items: center; /* Centra verticalmente los enlaces del nav */
 }
 
 nav a {
     margin: 0 15px;
     text-decoration: none;
-    color: #ffd900;
+    color: white;
     text-shadow: 0 0 5px rgb(1, 32, 170), 0 0 5px rgb(255, 0, 0), 0 0 5px rgb(1, 32, 170);
     padding: 5px 10px;
     transition: color 0.3s ease, background-color 0.3s ease;
@@ -29,7 +38,7 @@ nav a {
 
 nav a:hover {
     color: #ffffff;
-    background-color: #ffd900c7;
+    background-color: black;
     border-radius: 7px;
 }
 
@@ -59,7 +68,7 @@ nav a:hover {
     margin: 0;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     font-size: 14px;
-    scrollbar-color: #0000009c #636363;/*color del scroll*/
+    scrollbar-color: #0000009c #636363; /* color del scroll */
     scrollbar-width: thin;
 }
 
@@ -151,7 +160,7 @@ nav a:hover {
 }
 
 .nav_vertical li a:hover {
-    background-color: inherit;/* Hereda el color de fondo del elemento li */
+    background-color: inherit; /* Hereda el color de fondo del elemento li */
 }
 
 .pokedex, .acompañantes {
