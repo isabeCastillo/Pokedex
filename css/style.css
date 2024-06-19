@@ -3,6 +3,7 @@ body {
     background-color: black;
     margin: 0;
     padding: 0;
+    
 }
 
 header {
@@ -15,8 +16,8 @@ header {
 
 }
 header #logo {
-    width: 80px; /* Ajusta el ancho según sea necesario */
-    height: 80px; /* Altura automática para mantener la proporción */
+    width: 110px; /* Ajusta el ancho según sea necesario */
+    height: 110px; /* Altura automática para mantener la proporción */
     margin-right: 10px; /* Espacio entre el logo y el título */
 }
 
@@ -178,3 +179,12 @@ nav a:hover {
     justify-content: center;
     padding: 20px;
 }
+
+/* Estilos para la imagen hero */
+#Inicio img {
+    max-width: 60%; /* Reducir el tamaño máximo de la imagen */
+    float: right; /* Alinear la imagen a la derecha */
+    margin-left: 20px; /* Espacio entre el texto y la imagen */
+    margin-bottom: 20px; /* Espacio inferior */
+}
+
