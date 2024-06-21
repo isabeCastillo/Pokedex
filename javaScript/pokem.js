@@ -4,18 +4,17 @@ class Pokemon{
         this.tipo = tipo;
         this.imagen = imagen;
     }
-    
-    //metodo dibujarPokemon
 
     dibujarPokemon(){
         const pokemonDiv = document.createElement('div');
         pokemonDiv.classList.add('pokemon-card');
-        pokemonDiv.innerHTML = `
-        <img src="${this.imagen}" alt="${this.nombre}">
-        <h3>${this.nombre}</h3>
-        <p>Tipo:${this.tipo}</p>
-        `;
 
+        pokemonDiv.innerHTML = `
+        <img src="${this.imagen}" alt ="${this.nombre}">
+        <h3>${this.nombre}</h3>
+        <p>Tipo: ${this.tipo}</p>
+        `;
+        
         return pokemonDiv;
     }
 }
