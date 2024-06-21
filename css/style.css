@@ -235,3 +235,23 @@ nav a:hover {
     height: auto;
     margin: 10px; /* Añadir margen entre las imágenes */
 }
+
+/* trabajando el diseño de las pokemon-card*/
+.pokemon-card{
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow:0 2px 5px rgba(0, 0, 0, 0.2) ;
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.pokemon-card:hover{
+    transform: scale(1.05); /*aumenta tamaño al pasar el cursor*/
+}
+
+.pokemon-card img{
+    width: 100px; /*ancho de las imagenes dentro de las tarjetas*/
+    height: 100px; /*altura de las imagenes*/
+}
