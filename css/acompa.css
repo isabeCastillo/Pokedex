@@ -5,20 +5,6 @@ body {
     padding: 0;
 }
 
-#Inicio h2 {
-    color: black; /* Color blanco para el texto */
-    text-align:center;
-    justify-content: center;
-}
-
-#Inicio {
-    color: white; /* Color del texto */
-    text-align: justify; /* Alineación justificada del texto */
-    max-width: 800px; /* Ancho máximo del contenido */
-    margin: 0 auto; /* Centrado horizontal del contenido */
-    padding: 20px; /* Espacio interno */
-}
-
 #Inicio p {
     margin-bottom: 20px; /* Espacio inferior */
 }
@@ -187,35 +173,9 @@ nav a:hover {
     background-color: inherit; /* Hereda el color de fondo del elemento li */
 }
 
-.pokedex, .acompañantes {
+.acompañantes {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     padding: 20px;
-}
-
-#pokedex {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
-}
-
-.pokemon-card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    margin: 10px;
-    padding: 20px;
-    text-align: center;
-    transition: transform 0.3s;
-}
-
-.pokemon-card:hover {
-    transform: scale(1.05);
-}
-
-.pokemon-card img {
-    width: 100px;
-    height: 100px;
 }
