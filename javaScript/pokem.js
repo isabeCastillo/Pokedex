@@ -2,7 +2,7 @@ class Pokemon{
     constructor(nombre, tipo, imagen){
         this.nombre = nombre;
         this.tipo = tipo;
-        this,imagen = imagen;
+        this.imagen = imagen;
     }
     
     //metodo dibujarPokemon
