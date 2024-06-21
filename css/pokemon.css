@@ -211,6 +211,8 @@ nav a:hover {
     transition: transform 0.3s;
 }
 
+
+
 .pokemon-card:hover {
     transform: scale(1.05);
 }
