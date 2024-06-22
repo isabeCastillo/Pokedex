@@ -5,8 +5,13 @@ body {
     padding: 0;
 }
 
-#Inicio p {
-    margin-bottom: 20px; /* Espacio inferior */
+#Inicio {
+    color: white; /* Color del texto */
+    text-align: justify; /* Alineación justificada del texto */
+    max-width: 800px; /* Ancho máximo del contenido */
+    margin: 0 auto; /* Centrado horizontal del contenido */
+    padding: 20px; /* Espacio interno */
+    margin-top: 70px; /* Añadir margen superior para evitar que el contenido quede oculto bajo el nav */
 }
 
 header {
@@ -16,8 +21,11 @@ header {
     display: flex;
     align-items: center; /* Centra verticalmente los elementos dentro del header */
     justify-content: space-between; /* Distribuye espacio entre los elementos del header */
+    position: fixed; /* Fija el header en su posición */
+    top: 0; /* Posiciona el header en la parte superior */
+    width: 100%; /* Ancho completo de la pantalla */
+    z-index: 1000; /* Asegura que el header esté por encima de otros elementos */
 }
-
 header #logo {
     width: 50px; /* Ajusta el ancho según sea necesario */
     height: 50px; /* Altura automática para mantener la proporción */

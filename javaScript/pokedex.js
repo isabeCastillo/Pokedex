@@ -8,12 +8,12 @@ class Pokedex {
 
     async obtenerTodosLosPokemon() {
         try {
-            // Iterar del 1 al 150 para obtener cada Pokémon por su ID
+            //Iterar del 1 al 150 para obtener cada Pokémon por su ID
             for (let id = 1; id <= 150; id++) {
                 await this.obtenerInfoPokemonPorId(id);
             }
         } catch (error) {
-            console.error('Error al obtener datos de Pokemon:', error); // Manejar errores de la solicitud
+            console.error('Error al obtener datos de Pokemon:', error);//permite manejar los errores
         }
     }
     
@@ -31,20 +31,20 @@ class Pokedex {
             const numero = `N° ${String(data.id).padStart(4, '0')}`;
             const nombre = data.name.charAt(0).toUpperCase() + data.name.slice(1);
             const especie = data.species.name;
-            const altura = data.height / 10; // Convertir a metros
-            const peso = data.weight / 10; // Convertir a kilogramos
+            const altura = data.height / 10;
+            const peso = data.weight / 10;
             const tipo = data.types.map(type => type.type.name);
             const habilidades = data.abilities.map(ability => ability.ability.name);
             const debilidades = await this.obtenerDebilidades(tipo);
             const stats = data.stats.map(stat => ({ name: stat.stat.name, value: stat.base_stat }));
-            const moves = data.moves.slice(0, 5).map(move => move.move.name); // Limitar a los primeros 5 movimientos
+            const moves = data.moves.slice(0, 5).map(move => move.move.name);//limitar a los primeros 5 movimientos
             const imagen = data.sprites.front_default;
-            const sprites = Object.values(data.sprites).filter(sprite => typeof sprite === 'string'); // Filtrar solo las URLs de las imágenes
-    
+            const sprites = Object.values(data.sprites).filter(sprite => typeof sprite === 'string');//filtrar solo las URL de las imagenes
+
             // Crear una nueva instancia de Pokemon con los datos obtenidos
             const nuevoPokemon = new Pokemon(numero, nombre, especie, altura, peso, tipo, habilidades, debilidades, stats, moves, imagen, sprites);
             this.agregarPokemon(nuevoPokemon); // Agregar el Pokémon a la Pokedex
-    
+
         } catch (error) {
             console.error(`Error al obtener datos de Pokemon con ID ${id}:`, error); // Manejar errores de la solicitud
         }
@@ -58,7 +58,7 @@ async obtenerDebilidades(tipos) {
         const data = await response.json();
         data.damage_relations.double_damage_from.forEach(damage => debilidades.add(damage.name));
     }
-    return Array.from(debilidades); // Convertir el Set a un arreglo
+    return Array.from(debilidades); //convertir el Set a un arreglo
 }
 
 // Método para agregar un Pokémon al arreglo de pokemons
