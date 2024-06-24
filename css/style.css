@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: monospace;
     background-color: black;
     margin: 0;
     padding: 0;
@@ -25,7 +25,7 @@ body {
 }
 
 header {
-    background-color: #ffcc00;
+    background-color: #000550;
     padding: 10px;
     text-align: left; /* Cambia el texto a la izquierda */
     display: flex;
@@ -222,7 +222,7 @@ nav a:hover {
     background-color: #F7D02C;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    border: 2px solid #007bff;
+    border: 2px solid #094688;
 }
 
 .contenedor-imagenes {

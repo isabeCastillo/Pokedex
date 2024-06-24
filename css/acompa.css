@@ -1,21 +1,18 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: monospace;
     background-color: black;
     margin: 0;
     padding: 0;
 }
 
 #Inicio {
-    color: white; /* Color del texto */
-    text-align: justify; /* Alineación justificada del texto */
-    max-width: 800px; /* Ancho máximo del contenido */
     margin: 0 auto; /* Centrado horizontal del contenido */
     padding: 20px; /* Espacio interno */
     margin-top: 70px; /* Añadir margen superior para evitar que el contenido quede oculto bajo el nav */
 }
 
 header {
-    background-color: #ffcc00;
+    background-color: #000550;
     padding: 10px;
     text-align: left; /* Cambia el texto a la izquierda */
     display: flex;
@@ -104,7 +101,7 @@ nav a:hover {
     color: #ffffff;
     text-decoration: none;
 }
-
+/*colores segun el tipo de pokemon*/
 .nav_vertical li.normal {
     background-color: #A8A77A;
 }

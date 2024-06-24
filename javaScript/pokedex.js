@@ -28,7 +28,7 @@ class Pokedex {
             const data = await response.json(); // Parsear la respuesta JSON
     
             // Obtener y formatear los datos necesarios del Pokémon
-            const numero = `N° ${String(data.id).padStart(4, '0')}`;
+            const numero = `#${String(data.id).padStart(4, '0')}`;
             const nombre = data.name.charAt(0).toUpperCase() + data.name.slice(1);
             const especie = data.species.name;
             const altura = data.height / 10;
