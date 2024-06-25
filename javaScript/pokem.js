@@ -52,13 +52,15 @@ class Pokemon {
         const tipoColor = this.obtenerColorDeTipo();
         pokemonDiv.style.backgroundColor = tipoColor;
 
-        //definiendo html
+        //Este es el html de la tarjeta, se muestra la imagen, el nombre y el tipo del pokemon
         pokemonDiv.innerHTML = `
-            <img src="${this.imagen}" alt="${this.nombre}"><!-- Imagen principal del Pokémon -->
-            <h3>${this.nombre}</h3><!-- Nombre del Pokémon -->
-            <p>${this.numero}</p><!-- Número del Pokémon -->
-            <p>Tipo: ${this.tipo.join(', ')}</p><!-- Tipos del Pokémon, concatenados por comas -->
-            <button class="select-companion-btn">Seleccionar acompañante</button>
+            <div class="pokemon-container">
+                <img src="${this.imagen}" alt="${this.nombre}">
+                <h3>${this.nombre}</h3>
+                <p>${this.numero}</p>
+                <p>Tipo: ${this.tipo.join(', ')}</p>
+            </div>
+            <button class="select-companion-btn">Agregar acompañante</button>
         `;
 
         pokemonDiv.querySelector('.select-companion-btn').addEventListener('click', () => {
@@ -66,7 +68,7 @@ class Pokemon {
         });
 
         //agregar evento de clic para mostrar el modal
-        pokemonDiv.addEventListener('click', () => {
+        pokemonDiv.querySelector('.pokemon-container').addEventListener('click', () => {
             this.mostrarModal(); // Llamar a la función mostrarModal al hacer clic en la tarjeta
         });
         return pokemonDiv; //Retornar el div contenedor completo

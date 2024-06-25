@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const miPokedex = new Pokedex(); // Crear una nueva instancia de Pokedex
     await miPokedex.obtenerTodosLosPokemon(); // Obtener todos los Pokémon y añadirlos a la Pokedex
     miPokedex.dibujarPokedex(); // Dibujar la Pokedex en el DOM
+    miPokedex.dibujarAcompanates();
 
     // Manejar la navegación entre secciones
     const sectionLinks = document.querySelectorAll('nav a[data-section]');
@@ -18,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Manejar el clic en el enlace "Ver todos"
     const verTodosLink = document.getElementById('ver-todos');
-    verTodosLink.addEventListener('click', (event) => {
+    verTodosLink && verTodosLink.addEventListener('click', (event) => {
         event.preventDefault(); // Prevenir el comportamiento por defecto del enlace
         showSection('pokedex'); // Mostrar la sección de la Pokedex
         mostrarTodosLosPokemon(); // Mostrar todos los Pokémon
@@ -39,17 +40,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     function showSection(sectionId) {
         const sections = document.querySelectorAll('main section');
         sections.forEach(section => {
-            section.classList.remove('active'); // Ocultar todas las secciones
+             // Ocultar todas las secciones
+            section.classList.remove('active');
+            section.classList.add('inactive');
         });
         const targetSection = document.getElementById(sectionId);
         if (targetSection) {
+            targetSection.classList.remove('inactive');
             targetSection.classList.add('active'); // Mostrar la sección objetivo
         }
     }
 
     // Función para mostrar todos los Pokémon
     function mostrarTodosLosPokemon() {
-        const pokedexSection = document.getElementById('pokedex');
+        const pokedexSection = document.querySelector('.pokedex');
         pokedexSection.innerHTML = ''; // Limpiar el contenido de la Pokedex antes de mostrar todos los Pokémon
 
         miPokedex.pokemons.forEach(pokemon => {
@@ -64,7 +68,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             return pokemon.tipo.includes(tipo.toLowerCase()); // Filtrar los Pokémon por tipo
         });
 
-        const pokedexSection = document.getElementById('pokedex');
+        const pokedexSection = document.querySelector('.pokedex');
         pokedexSection.innerHTML = ''; // Limpiar el contenido de la Pokedex antes de mostrar los Pokémon filtrados
 
         pokemonFiltrados.forEach(pokemon => {

@@ -6,17 +6,19 @@
     <link rel="icon" href="./img/poken.png" type="image/png">
     <title>Pokédex</title>
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/pokemon.css">
+    <script src="../javaScript/main.js" type="module" ></script>
 </head>
 <body>
     <header>
         <img id="logo" src="./img/logo.png" alt="">
         <nav>
             <ul class="nav_horizontal">
-                <li><a href="./index.html">Inicio</a></li>
+                <li><a data-section="inicio">Inicio</a></li>
                 <li>
-                    <a href="./enlace-html/pokemon.html">Pokédex</a>
+                    <a data-section="pokedex">Pokédex</a>
                     <ul class="nav_vertical">
-                        <li><a href="#" data-tipo="ver-todos">Ver todos</a></li>
+                        <li><a href="#" id="ver-todos">Ver todos</a></li>
                         <li class="normal"><a href="#" data-tipo="normal">Normal</a></li>
                         <li class="fire"><a href="#" data-tipo="fire">Fire</a></li>
                         <li class="water"><a href="#" data-tipo="water">Water</a></li>
@@ -37,12 +39,12 @@
                         <li class="fairy"><a href="#" data-tipo="fairy">Fairy</a></li>
                     </ul>
                 </li>
-                <li><a href="../enlace-html/acompa.html">Mis Acompañantes</a></li>
+                <li><a data-section="acompanantes" >Mis Acompañantes</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <section id="Inicio" class="active">
+        <section id="inicio" class="active">
             <div class="contenedor-imagenes">
                 <img src="./img/POKEDEXX.png" alt="">
                 <img src="./img/pikachuaccion.gif" alt="">
@@ -58,8 +60,16 @@
                 </div>
             </div>
         </section>
-        <section id="pokedex"></section>
-        <section id="acompañantes"></section>
+        <section id="pokedex">
+            <div class="pokedex">
+
+            </div>
+        </section>
+        <section id="acompanantes">
+            <div class="acompanantes">
+
+            </div>
+        </section>
     </main>
 </body>
 </html>

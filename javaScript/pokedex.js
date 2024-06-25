@@ -4,6 +4,8 @@ import Pokemon from "./pokem.js"; // Importar la clase Pokemon
 class Pokedex {
     constructor() {
         this.pokemons = []; // Inicializar un arreglo vacío para almacenar los Pokémon
+        //Obtiene los acompañantes guardados
+        this.acompanates = JSON.parse(localStorage.getItem('acompanantes')) || [];
     }
 
     async obtenerTodosLosPokemon() {
@@ -66,17 +68,32 @@ agregarPokemon(pokemon) {
     this.pokemons.push(pokemon);
 }
 
-// Método para dibujar la Pokedex en el elemento HTML con id 'pokedex'
+// Método para dibujar la Pokedex en el elemento HTML con clase 'pokedex'
 dibujarPokedex() {
-    const pokedexSection = document.getElementById('pokedex');
+    const pokedexSection = document.querySelector('.pokedex');
     pokedexSection.innerHTML = ''; // Limpiar el contenido existente
-
     // Iterar sobre cada Pokémon y añadir su representación HTML a la Pokedex
     this.pokemons.forEach(pokemon => {
         const pokemonDiv = pokemon.dibujarPokemon();
         pokedexSection.appendChild(pokemonDiv);
     });
 }
+
+// Método para dibujar los acompanantes en el HTML con clase 'acompanantes'
+dibujarAcompanates() {
+    const section = document.querySelector('.acompanantes');
+    console.log("acompañantes");
+    console.log(this.acompanates);
+    section.innerHTML = ''; // Limpiar el contenido existente
+    // Iterar sobre cada Pokémon y añadir su representación HTML a la Pokedex
+    this.acompanates.forEach(acompanante => {
+        const {numero, nombre, especie, altura, peso, tipo, habilidades, debilidades, stats, moves, imagen, sprites} = acompanante
+        const pokemon = new Pokemon(numero, nombre, especie, altura, peso, tipo, habilidades, debilidades, stats, moves, imagen, sprites)
+        const pokemonDiv = pokemon.dibujarPokemon();
+        section.appendChild(pokemonDiv);
+    });
+}
+
 }
 
 export default Pokedex; // Exportar la clase Pokedex para ser utilizada en otros módulos

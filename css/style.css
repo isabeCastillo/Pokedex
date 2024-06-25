@@ -5,13 +5,13 @@ body {
     padding: 0;
 }
 
-#Inicio h2 {
+#inicio h2 {
     color: black; /* Color blanco para el texto */
     text-align:center;
     justify-content: center;
 }
 
-#Inicio {
+#inicio {
     color: white; /* Color del texto */
     text-align: justify; /* Alineación justificada del texto */
     max-width: 800px; /* Ancho máximo del contenido */
@@ -20,7 +20,7 @@ body {
     margin-top: 70px; /* Añadir margen superior para evitar que el contenido quede oculto bajo el nav */
 }
 
-#Inicio p {
+#inicio p {
     margin-bottom: 20px; /* Espacio inferior */
 }
 
@@ -192,14 +192,8 @@ nav a:hover {
     background-color: inherit; /* Hereda el color de fondo del elemento li */
 }
 
-.pokedex, .acompañantes {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
-}
 
-#Inicio img {
+#inicio img {
     max-width: 40%; /* Reducir el tamaño máximo de la imagen */
     display: block; /* Asegurar que la imagen se comporte como un bloque */
     margin: 0px auto; /* Espacio superior e inferior para bajar la imagen */
@@ -236,9 +230,18 @@ nav a:hover {
     margin: 10px; /* Añadir margen entre las imágenes */
 }
 
-#pokedex, #companions {
+.pokedex, .acompanantes {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     padding: 20px;
+    margin-top: 50px;
+}
+
+.active {
+    display: block;
+}
+
+.inactive {
+    display: none;
 }
