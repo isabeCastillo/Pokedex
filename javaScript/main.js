@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const miPokedex = new Pokedex(); // Crear una nueva instancia de Pokedex
     await miPokedex.obtenerTodosLosPokemon(); // Obtener todos los Pokémon y añadirlos a la Pokedex
     miPokedex.dibujarPokedex(); // Dibujar la Pokedex en el DOM
-    miPokedex.dibujarAcompanates();
+    miPokedex.dibujarAcompanantes(); // Dibuja los acompanantes
 
     // Manejar la navegación entre secciones
     const sectionLinks = document.querySelectorAll('nav a[data-section]');

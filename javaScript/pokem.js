@@ -44,7 +44,7 @@ class Pokemon {
     }
 
     // Método para dibujar el Pokémon
-    dibujarPokemon() {
+    dibujarPokemon(dibujarComoAcompanante, dibujarAcompanantes) {
         //creando un div contenedor para la tarjeta
         const pokemonDiv = document.createElement('div');
         pokemonDiv.classList.add('pokemon-card');//añadir clase para el css
@@ -60,11 +60,18 @@ class Pokemon {
                 <p>${this.numero}</p>
                 <p>Tipo: ${this.tipo.join(', ')}</p>
             </div>
-            <button class="select-companion-btn">Agregar acompañante</button>
+            <button class="select-companion-btn">
+                ${dibujarComoAcompanante ? 'Eliminar acompañante' : 'Agregar acompañante'}
+            </button>
         `;
-
-        pokemonDiv.querySelector('.select-companion-btn').addEventListener('click', () => {
-            this.seleccionarComoAcompanante();
+        console.log(dibujarAcompanantes);
+        pokemonDiv.querySelector('.select-companion-btn').
+        addEventListener('click', () => {
+            if(dibujarComoAcompanante){
+                this.eliminarAcompanante(dibujarAcompanantes);
+            } else {
+                this.seleccionarComoAcompanante(dibujarAcompanantes);
+            }
         });
 
         //agregar evento de clic para mostrar el modal
@@ -74,7 +81,7 @@ class Pokemon {
         return pokemonDiv; //Retornar el div contenedor completo
     }
 
-    seleccionarComoAcompanante() {
+    seleccionarComoAcompanante(dibujarAcompanantes) {
         const acompanantes = JSON.parse(localStorage.getItem('acompanantes')) || [];
         if (acompanantes.length >= 6) {
             alert('No puedes seleccionar más de 6 acompañantes.');
@@ -88,7 +95,17 @@ class Pokemon {
 
         acompanantes.push(this);
         localStorage.setItem('acompanantes', JSON.stringify(acompanantes));
+        dibujarAcompanantes()
         alert(`${this.nombre} ha sido añadido como acompañante.`);
+    }
+
+    eliminarAcompanante(dibujarAcompanantes){
+        let acompanantes = JSON.parse(localStorage.getItem('acompanantes')) || [];
+
+        acompanantes = acompanantes.filter(pokemon => pokemon.numero !== this.numero)
+
+        localStorage.setItem('acompanantes', JSON.stringify(acompanantes));
+        dibujarAcompanantes()
     }
 
     // Método para mostrar el modal con información detallada

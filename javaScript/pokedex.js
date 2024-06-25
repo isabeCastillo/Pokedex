@@ -4,8 +4,6 @@ import Pokemon from "./pokem.js"; // Importar la clase Pokemon
 class Pokedex {
     constructor() {
         this.pokemons = []; // Inicializar un arreglo vacío para almacenar los Pokémon
-        //Obtiene los acompañantes guardados
-        this.acompanates = JSON.parse(localStorage.getItem('acompanantes')) || [];
     }
 
     async obtenerTodosLosPokemon() {
@@ -74,22 +72,24 @@ dibujarPokedex() {
     pokedexSection.innerHTML = ''; // Limpiar el contenido existente
     // Iterar sobre cada Pokémon y añadir su representación HTML a la Pokedex
     this.pokemons.forEach(pokemon => {
-        const pokemonDiv = pokemon.dibujarPokemon();
+        const pokemonDiv = pokemon.dibujarPokemon(false,this.dibujarAcompanantes.bind(this));
         pokedexSection.appendChild(pokemonDiv);
     });
 }
 
 // Método para dibujar los acompanantes en el HTML con clase 'acompanantes'
-dibujarAcompanates() {
+dibujarAcompanantes() {
     const section = document.querySelector('.acompanantes');
-    console.log("acompañantes");
-    console.log(this.acompanates);
     section.innerHTML = ''; // Limpiar el contenido existente
-    // Iterar sobre cada Pokémon y añadir su representación HTML a la Pokedex
-    this.acompanates.forEach(acompanante => {
+    // Itera sobre los acompañantes para dibujarlos en la sección que responde
+    const acompanantes = JSON.parse(localStorage.getItem('acompanantes')) || [];
+    acompanantes.forEach(acompanante => {
+        // Desestructuracion para obtener los datos para crear Pokemon
         const {numero, nombre, especie, altura, peso, tipo, habilidades, debilidades, stats, moves, imagen, sprites} = acompanante
+        // Se crea el pokemon
         const pokemon = new Pokemon(numero, nombre, especie, altura, peso, tipo, habilidades, debilidades, stats, moves, imagen, sprites)
-        const pokemonDiv = pokemon.dibujarPokemon();
+        //Se dibuja
+        const pokemonDiv = pokemon.dibujarPokemon(true,this.dibujarAcompanantes.bind(this)); //bind se usa para asegurar que la función dibujarAcompanantes siempre se ejecute con this apuntando al objeto de la clase Pokedex
         section.appendChild(pokemonDiv);
     });
 }
