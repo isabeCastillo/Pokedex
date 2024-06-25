@@ -1,6 +1,6 @@
-//creando la clase llamada Pokemon
+// pokem.js
+
 class Pokemon {
-    //constructor que inicializa todas las propiedades de la clase Pokemon
     constructor(numero, nombre, especie, altura, peso, tipo, habilidades, debilidades, stats, moves, imagen, sprites) {
         this.numero = numero;
         this.nombre = nombre;
@@ -16,7 +16,6 @@ class Pokemon {
         this.sprites = sprites;
     }
 
-    //metodo para obtener el color basado en el tipo
     obtenerColorDeTipo() {
         const coloresDeTipo = {
             normal: '#A8A77A',
@@ -39,25 +38,21 @@ class Pokemon {
             fairy: '#D685AD',
         };
 
-        //usa el primer tipo (refiriendo al tipo de pokemon) para determinar el color
-        return coloresDeTipo[this.tipo[0].toLowerCase()] || '#777'; // Por defecto es gris si no se encuentra el tipo
+        return coloresDeTipo[this.tipo[0].toLowerCase()] || '#777';
     }
 
-    // Método para dibujar el Pokémon
     dibujarPokemon() {
-        //creando un div contenedor para la tarjeta
         const pokemonDiv = document.createElement('div');
-        pokemonDiv.classList.add('pokemon-card');//añadir clase para el css
-        // Aplicar el color de fondo según el tipo
+        pokemonDiv.classList.add('pokemon-card');
         const tipoColor = this.obtenerColorDeTipo();
         pokemonDiv.style.backgroundColor = tipoColor;
+        pokemonDiv.dataset.pokemonId = this.numero; // Añadir un data attribute para identificar el Pokémon
 
-        //definiendo html
         pokemonDiv.innerHTML = `
-            <img src="${this.imagen}" alt="${this.nombre}"><!-- Imagen principal del Pokémon -->
-            <h3>${this.nombre}</h3><!-- Nombre del Pokémon -->
-            <p>${this.numero}</p><!-- Número del Pokémon -->
-            <p>Tipo: ${this.tipo.join(', ')}</p><!-- Tipos del Pokémon, concatenados por comas -->
+            <img src="${this.imagen}" alt="${this.nombre}">
+            <h3>${this.nombre}</h3>
+            <p>${this.numero}</p>
+            <p>Tipo: ${this.tipo.join(', ')}</p>
             <button class="select-companion-btn">Seleccionar acompañante</button>
         `;
 
@@ -65,11 +60,11 @@ class Pokemon {
             this.seleccionarComoAcompanante();
         });
 
-        //agregar evento de clic para mostrar el modal
         pokemonDiv.addEventListener('click', () => {
-            this.mostrarModal(); // Llamar a la función mostrarModal al hacer clic en la tarjeta
+            this.mostrarModal();
         });
-        return pokemonDiv; //Retornar el div contenedor completo
+
+        return pokemonDiv;
     }
 
     seleccionarComoAcompanante() {
@@ -89,7 +84,6 @@ class Pokemon {
         alert(`${this.nombre} ha sido añadido como acompañante.`);
     }
 
-    // Método para mostrar el modal con información detallada
     mostrarModal() {
         let modal = document.getElementById('pokemon-modal');
         if (!modal) {
@@ -105,69 +99,57 @@ class Pokemon {
         const tipoColor = this.obtenerColorDeTipo();
         const modalContent = modal.querySelector('.modal-content');
         modalContent.innerHTML = `
-            <div class="modal-header">
-                <h2>${this.nombre}</h2>
-                <span class="close">&times;</span>
+        <span class="close">&times;</span>
+        <div class="modal-header">
+            <div><h1>${this.nombre}</h1></div>
+        </div>
+        <div class="modal-body">
+            <div class="pokemon-info">
+                <h3>Información general del Pokemón</h3>
+                <p>${this.numero}</p>
+                <img class="modal-img img-animate" src="${this.imagen}" alt="${this.nombre}">
+                <p>Tipo: ${this.tipo.join(', ')}</p>
             </div>
-            <div class="modal-body">
-                <div class="pokemon-info">
-                    <p>${this.numero}</p>
-                    <img class="modal-img img-animate" src="${this.imagen}" alt="${this.nombre}">
-                    <p>Tipo: ${this.tipo.join(', ')}</p>
-                </div>
-                <nav class="modal-nav">
-                    <button class="nav-button active" data-section="sobre">Sobre</button>
-                    <button class="nav-button" data-section="stats">Stats</button>
-                    <button class="nav-button" data-section="moves">Moves</button>
-                </nav>
-                <div class="modal-section active" id="sobre">
-                    <p>Especie: ${this.especie}</p>
-                    <p>Peso: ${this.peso} kg</p>
-                    <p>Altura: ${this.altura} m</p>
-                    <p>Habilidades: ${this.habilidades.join(', ')}</p>
-                    <p>Debilidades: ${this.debilidades.join(', ')}</p>
-                </div>
-                <div class="modal-section" id="stats">
-                    <p>Stats:</p>
-                    <ul class="stats-list">
-                        ${this.stats.map(stat => `
-                            <li>
-                                ${stat.name}: ${stat.value}
-                                <div class="stat-bar">
-                                    <div class="stat-bar-fill" style="width: ${stat.value/200 * 100}%;"></div>
-                                </div>
-                            </li>
-                        `).join('')}
-                    </ul>
-                </div>
-                <div class="modal-section" id="moves">
-                    <p>Movimientos:</p>
-                    <ul class="moves-list">
-                        ${this.moves.map(move => `<li class="move-item">${move}</li>`).join('')}
-                    </ul>
-                </div>
-                <div class="sprites">
-                    ${this.sprites.map(sprite => `<img src="${sprite}" alt="sprite de ${this.nombre}">`).join('')}
-                </div>
+            <div class="modal-section" id="sobre">
+                <p>Especie: ${this.especie}</p>
+                <p>Peso: ${this.peso} kg</p>
+                <p>Altura: ${this.altura} m</p>
+                <p>Habilidades: ${this.habilidades.join(', ')}</p>
+                <p>Debilidades: ${this.debilidades.join(', ')}</p>
             </div>
-        `;
+            <div class="modal-section" id="stats">
+                <h3>Estadisticas</h3>
+                <ul class="stats-list">
+                    ${this.stats.map(stat => `
+                        <li>
+                            ${stat.name}: ${stat.value}
+                            <div class="stat-bar">
+                                <div class="stat-bar-fill" style="width: ${stat.value / 200 * 100}%;"></div>
+                            </div>
+                        </li>
+                    `).join('')}
+                </ul>
+            </div>
+            <div class="modal-section" id="moves">
+                <h3>Movimientos:</h3>
+                <ul class="moves-list">
+                    ${this.moves.map(move => `<li class="move-item">${move}</li>`).join('')}
+                </ul>
+            </div>
+            <div class="sprites">
+                ${this.sprites.map(sprite => `<img src="${sprite}" alt="sprite de ${this.nombre}">`).join('')}
+            </div>
+        </div>
+    `;
+
         modalContent.style.backgroundColor = tipoColor;
         modal.style.display = 'block';
 
-        // Event listeners para navegación del modal
-        const navButtons = modal.querySelectorAll('.nav-button');
-        const sections = modal.querySelectorAll('.modal-section');
-
-        navButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // Remover la clase 'active' de todas las secciones y botones
-                navButtons.forEach(btn => btn.classList.remove('active'));
-                sections.forEach(section => section.classList.remove('active'));
-
-                // Agregar la clase 'active' al botón y sección seleccionada
-                button.classList.add('active');
-                const sectionId = button.getAttribute('data-section');
-                document.getElementById(sectionId).classList.add('active');
+        const tabs = modal.querySelectorAll('.tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.dataset.tab;
+                showTab(tabId, modal);
             });
         });
 
@@ -183,4 +165,19 @@ class Pokemon {
     }
 }
 
-export default Pokemon; //exportar la clase Pokemon para ser utilizada
+function showTab(tabId, modal) {
+    const tabs = modal.querySelectorAll('.tab');
+    tabs.forEach(tab => {
+        const contentId = tab.dataset.tab;
+        const content = modal.querySelector(`#${contentId}`);
+        if (contentId === tabId) {
+            tab.classList.add('active');
+            content.classList.add('active');
+        } else {
+            tab.classList.remove('active');
+            content.classList.remove('active');
+        }
+    });
+}
+
+export default Pokemon;
