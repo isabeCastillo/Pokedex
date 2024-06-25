@@ -1,6 +1,7 @@
 // pokem.js
-
+//creando la clase llamada Pokemon
 class Pokemon {
+    //constructor que inicializa todas las propiedades de la clase Pokemon
     constructor(numero, nombre, especie, altura, peso, tipo, habilidades, debilidades, stats, moves, imagen, sprites) {
         this.numero = numero;
         this.nombre = nombre;
@@ -15,7 +16,7 @@ class Pokemon {
         this.imagen = imagen;
         this.sprites = sprites;
     }
-
+  //metodo para obtener el color basado en el tipo
     obtenerColorDeTipo() {
         const coloresDeTipo = {
             normal: '#A8A77A',
@@ -37,7 +38,7 @@ class Pokemon {
             steel: '#B7B7CE',
             fairy: '#D685AD',
         };
-
+// Por defecto es gris si no se encuentra el tipo
         return coloresDeTipo[this.tipo[0].toLowerCase()] || '#777';
     }
 

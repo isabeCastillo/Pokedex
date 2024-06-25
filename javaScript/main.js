@@ -1,19 +1,22 @@
 // main.js
-
+// Importar la clase Pokedex
 import Pokedex from './pokedex.js';
 
+// Esperar a que el DOM esté completamente cargado
 document.addEventListener('DOMContentLoaded', async () => {
-    const miPokedex = new Pokedex();
-    await miPokedex.obtenerTodosLosPokemon();
-    miPokedex.dibujarPokedex();
+    const miPokedex = new Pokedex(); // Crear una nueva instancia de Pokedex
+    await miPokedex.obtenerTodosLosPokemon(); // Obtener todos los Pokémon y añadirlos a la Pokedex
+    miPokedex.dibujarPokedex(); // Dibujar la Pokedex en el DOM
+    miPokedex.dibujarAcompanantes(); // Dibuja los acompanantes
 
+    // Manejar la navegación entre secciones
     function setupSectionLinks() {
         const sectionLinks = document.querySelectorAll('nav a[data-section]');
         sectionLinks.forEach(link => {
             link.addEventListener('click', (event) => {
-                event.preventDefault();
-                const sectionId = event.target.getAttribute('data-section');
-                showSection(sectionId);
+                event.preventDefault(); // Prevenir el comportamiento por defecto del enlace
+                const sectionId = event.target.getAttribute('data-section'); // Obtener el ID de la sección a mostrar
+                showSection(sectionId); // Mostrar la sección correspondiente
             });
         });
     }
