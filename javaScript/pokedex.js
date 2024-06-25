@@ -78,6 +78,23 @@ class Pokedex {
             pokedexSection.appendChild(pokemonDiv);
         });
     }
+
+        // Método para dibujar los acompanantes en el HTML con clase 'acompanantes'
+    dibujarAcompanantes() {
+    const section = document.querySelector('.acompanantes');
+    section.innerHTML = ''; // Limpiar el contenido existente
+    // Itera sobre los acompañantes para dibujarlos en la sección que responde
+    const acompanantes = JSON.parse(localStorage.getItem('acompanantes')) || [];
+    acompanantes.forEach(acompanante => {
+        // Desestructuracion para obtener los datos para crear Pokemon
+        const {numero, nombre, especie, altura, peso, tipo, habilidades, debilidades, stats, moves, imagen, sprites} = acompanante
+        // Se crea el pokemon
+        const pokemon = new Pokemon(numero, nombre, especie, altura, peso, tipo, habilidades, debilidades, stats, moves, imagen, sprites)
+        //Se dibuja
+        const pokemonDiv = pokemon.dibujarPokemon(true,this.dibujarAcompanantes.bind(this)); //bind se usa para asegurar que la función dibujarAcompanantes siempre se ejecute con this apuntando al objeto de la clase Pokedex
+        section.appendChild(pokemonDiv);
+    });
+}
 }
 
 export default Pokedex; // Exportar la clase Pokedex para ser utilizada en otros módulos
