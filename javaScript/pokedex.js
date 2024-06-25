@@ -1,6 +1,8 @@
-//heredando la clase
-import Pokemon from "./pokem.js"; // Importar la clase Pokemon
+// pokedex.js
+// Importar la clase Pokemon desde './pokem.js'
+import Pokemon from "./pokem.js";
 
+// Resto del código de la clase Pokedex
 class Pokedex {
     constructor() {
         this.pokemons = []; // Inicializar un arreglo vacío para almacenar los Pokémon
@@ -13,10 +15,10 @@ class Pokedex {
                 await this.obtenerInfoPokemonPorId(id);
             }
         } catch (error) {
-            console.error('Error al obtener datos de Pokemon:', error);//permite manejar los errores
+            console.error('Error al obtener datos de Pokemon:', error); // Permite manejar los errores
         }
     }
-    
+
     // Nuevo método para obtener información de un Pokémon por su ID
     async obtenerInfoPokemonPorId(id) {
         const URL = `https://pokeapi.co/api/v2/pokemon/${id}`;
@@ -26,7 +28,7 @@ class Pokedex {
                 throw new Error(`Error HTTP!! Estado: ${response.status}`); // Lanzar un error si la respuesta no es exitosa
             }
             const data = await response.json(); // Parsear la respuesta JSON
-    
+
             // Obtener y formatear los datos necesarios del Pokémon
             const numero = `#${String(data.id).padStart(4, '0')}`;
             const nombre = data.name.charAt(0).toUpperCase() + data.name.slice(1);
@@ -37,46 +39,45 @@ class Pokedex {
             const habilidades = data.abilities.map(ability => ability.ability.name);
             const debilidades = await this.obtenerDebilidades(tipo);
             const stats = data.stats.map(stat => ({ name: stat.stat.name, value: stat.base_stat }));
-            const moves = data.moves.slice(0, 5).map(move => move.move.name);//limitar a los primeros 5 movimientos
+            const moves = data.moves.slice(0, 5).map(move => move.move.name); // Limitar a los primeros 5 movimientos
             const imagen = data.sprites.front_default;
-            const sprites = Object.values(data.sprites).filter(sprite => typeof sprite === 'string');//filtrar solo las URL de las imagenes
+            const sprites = Object.values(data.sprites).filter(sprite => typeof sprite === 'string'); // Filtrar solo las URL de las imágenes
 
             // Crear una nueva instancia de Pokemon con los datos obtenidos
             const nuevoPokemon = new Pokemon(numero, nombre, especie, altura, peso, tipo, habilidades, debilidades, stats, moves, imagen, sprites);
             this.agregarPokemon(nuevoPokemon); // Agregar el Pokémon a la Pokedex
-
         } catch (error) {
             console.error(`Error al obtener datos de Pokemon con ID ${id}:`, error); // Manejar errores de la solicitud
         }
     }
 
-// Método para obtener las debilidades de un Pokémon según su tipo
-async obtenerDebilidades(tipos) {
-    const debilidades = new Set();
-    for (const tipo of tipos) {
-        const response = await fetch(`https://pokeapi.co/api/v2/type/${tipo}`);
-        const data = await response.json();
-        data.damage_relations.double_damage_from.forEach(damage => debilidades.add(damage.name));
+    // Método para obtener las debilidades de un Pokémon según su tipo
+    async obtenerDebilidades(tipos) {
+        const debilidades = new Set();
+        for (const tipo of tipos) {
+            const response = await fetch(`https://pokeapi.co/api/v2/type/${tipo}`);
+            const data = await response.json();
+            data.damage_relations.double_damage_from.forEach(damage => debilidades.add(damage.name));
+        }
+        return Array.from(debilidades); // Convertir el Set a un arreglo
     }
-    return Array.from(debilidades); //convertir el Set a un arreglo
-}
 
-// Método para agregar un Pokémon al arreglo de pokemons
-agregarPokemon(pokemon) {
-    this.pokemons.push(pokemon);
-}
+    // Método para agregar un Pokémon al arreglo de pokemons
+    agregarPokemon(pokemon) {
+        this.pokemons.push(pokemon);
+    }
 
-// Método para dibujar la Pokedex en el elemento HTML con id 'pokedex'
-dibujarPokedex() {
-    const pokedexSection = document.getElementById('pokedex');
-    pokedexSection.innerHTML = ''; // Limpiar el contenido existente
+    // Método para dibujar la Pokedex en el elemento HTML con id 'pokedex'
+    dibujarPokedex() {
+        const pokedexSection = document.getElementById('pokedex');
+        pokedexSection.innerHTML = ''; // Limpiar el contenido existente
 
-    // Iterar sobre cada Pokémon y añadir su representación HTML a la Pokedex
-    this.pokemons.forEach(pokemon => {
-        const pokemonDiv = pokemon.dibujarPokemon();
-        pokedexSection.appendChild(pokemonDiv);
-    });
-}
+        // Iterar sobre cada Pokémon y añadir su representación HTML a la Pokedex
+        this.pokemons.forEach(pokemon => {
+            const pokemonDiv = pokemon.dibujarPokemon();
+            pokedexSection.appendChild(pokemonDiv);
+        });
+    }
 }
 
 export default Pokedex; // Exportar la clase Pokedex para ser utilizada en otros módulos
