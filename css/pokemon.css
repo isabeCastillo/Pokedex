@@ -193,7 +193,7 @@ nav a:hover {
     padding: 20px;
 }
 
-/*diseño de carta del pokemon incial*/
+/* Diseño de carta del Pokémon inicial */
 .pokemon-card {
     border: 1px solid #ccc;
     background-color: #fff;
@@ -204,6 +204,7 @@ nav a:hover {
     text-align: center;
     transition: transform 0.3s;
     cursor: pointer;
+    position: relative; /* Añadido: posición relativa para contener el botón */
 }
 
 .pokemon-card:hover {
@@ -215,7 +216,7 @@ nav a:hover {
     height: 100px;
 }
 
-/*trabajando las stats*/
+/* Trabajando las stats */
 .stats-list {
     list-style: none;
     padding: 0;
@@ -234,7 +235,7 @@ nav a:hover {
     border-radius: 5px 0 0 5px;
 }
 
-/*trabajando los moves*/
+/* Trabajando los moves */
 .moves-list {
     list-style: none;
     padding: 0;
@@ -256,7 +257,7 @@ nav a:hover {
     background-color: #49252552;
 }
 
-/*trabajando el modo modal*/
+/* Trabajando el modal */
 .modal {
     display: none;
     position: fixed;
@@ -284,25 +285,34 @@ nav a:hover {
 
 .modal-header {
     display: flex;
-    justify-content: space-between;
+    justify-content:center;
     align-items: center;
+    text-align: center !important;
+}
+
+.modal-title {
+    margin: 0;
+    color: #ffffff;
+    font-size: 24px;
+    text-align: center;
+    justify-content: center !important;
 }
 
 .modal-body {
     padding: 10px 0;
 }
 
-/*close*/
+/* Close */
 .close {
     color: #ffffff;
-    font-size: 28px;
-    background-color: #f26250;
-    padding: 8px 10px;
-    border: 1px solid;
-    border-radius: 10px;
-    display: inline-block;
+    font-size: 20px;
+    padding: 4px 4px;
+    border-radius: 3px;
     font-weight: 300;
     transition: background-color .3s;
+    justify-content: end;
+    text-align: right;
+    display: flex;
 }
 
 .close:hover,
@@ -312,7 +322,7 @@ nav a:hover {
     cursor: pointer;
 }
 
-/*navegador en el modal*/
+/* Navegador en el modal */
 .modal-nav {
     display: flex;
     justify-content: space-around;
@@ -338,59 +348,5 @@ nav a:hover {
 }
 
 .modal-section {
-    display: none;
-}
-
-.modal-section.active {
     display: block;
-}
-
-/* Estilos para la imagen del modal */
-.modal-body img.modal-img {
-    width: 150px; /*ajusta el tamaño*/
-    height: auto;
-    display: block;
-    margin: 0 auto 5px;
-}
-
-/*animando la imagen*/
-@keyframes float {
-    0% {
-        transform: translateX(0px);
-    }
-    50% {
-        transform: translateX(20px);
-    }
-    100% {
-        transform: translateX(0px);
-    }
-}
-
-.img-animate {
-    animation: float 2s ease-in-out infinite;
-}
-
-/*boton para agregar acompañantes*/
-.select-companion-btn {
-    background-color: #ffffff;
-    border: none;
-    color: rgb(0, 0, 0);
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 10px 0;
-    cursor: pointer;
-    border-radius: 5px;
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: background-color 0.3s;
-}
-
-.select-companion-btn:hover {
-    background-color: black;
-    color: white;
 }
