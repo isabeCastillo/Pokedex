@@ -1,6 +1,7 @@
 body {
     font-family: monospace;
     background-color: black;
+    color: white;
     margin: 0;
     padding: 0;
 }
@@ -235,7 +236,27 @@ nav a:hover {
     flex-wrap: wrap;
     justify-content: center;
     padding: 20px;
-    margin-top: 50px;
+}
+
+#pokedex, #acompanantes {
+    margin-top: 80px;
+}
+
+select {
+    color: #000550;
+    font-weight: 700;
+    background-color: white;
+    border: none;
+    margin: 20px;
+    padding: 6px 10px;
+    border-radius: 5px;
+}
+
+option {
+    color: #000550;
+    font-weight: 700;
+    background-color: white;
+    border-radius: 5px;
 }
 
 .active {

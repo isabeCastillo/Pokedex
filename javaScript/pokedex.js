@@ -4,6 +4,13 @@ import Pokemon from "./pokem.js"; // Importar la clase Pokemon
 class Pokedex {
     constructor() {
         this.pokemons = []; // Inicializar un arreglo vacío para almacenar los Pokémon
+        this.entrenadores = [
+            {id: 1, nombre: "Isabel",acompanante:null},
+            {id: 2, nombre: "Dayna",acompanante:null},
+            {id: 3, nombre: "Osiris",acompanante:null},
+            {id: 4, nombre: "Vilma",acompanante:null},
+            {id: 5, nombre: "Katia",acompanante:null}
+        ]
     }
 
     async obtenerTodosLosPokemon() {
@@ -64,6 +71,15 @@ async obtenerDebilidades(tipos) {
 // Método para agregar un Pokémon al arreglo de pokemons
 agregarPokemon(pokemon) {
     this.pokemons.push(pokemon);
+}
+
+// Método para agregar los entrenadores al localstorage
+agregarEntreadores() {
+    // obtiene el item entrenadores
+    const entrenadores = JSON.parse(localStorage.getItem('entrenadores')) || [];
+    if(entrenadores.length === 0) { //si no existe el item, lo agrega
+        localStorage.setItem('entrenadores', JSON.stringify(this.entrenadores));
+    }
 }
 
 // Método para dibujar la Pokedex en el elemento HTML con clase 'pokedex'

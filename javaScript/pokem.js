@@ -43,7 +43,8 @@ class Pokemon {
         return coloresDeTipo[this.tipo[0].toLowerCase()] || '#777'; // Por defecto es gris si no se encuentra el tipo
     }
 
-    // Método para dibujar el Pokémon
+    // Método para dibujar el Pokémon, recibe dibujarComoAcompanante que es un booleano y 
+    // dibujarAcompanantes que es una funcion para volver a dibuajar los acompanantes cuaando se agregue/elimine acompanante
     dibujarPokemon(dibujarComoAcompanante, dibujarAcompanantes) {
         //creando un div contenedor para la tarjeta
         const pokemonDiv = document.createElement('div');
@@ -60,18 +61,29 @@ class Pokemon {
                 <p>${this.numero}</p>
                 <p>Tipo: ${this.tipo.join(', ')}</p>
             </div>
-            <button class="select-companion-btn">
+            <div class="pokemon-buttons-container">
+                <button id="selectCompanionBtn" class="select-companion-btn">
                 ${dibujarComoAcompanante ? 'Eliminar acompañante' : 'Agregar acompañante'}
-            </button>
+                </button>
+                ${dibujarComoAcompanante && '<button id="asignarAEntrenadorBtn" class="select-companion-btn">Asignar a entrenador</button>'}
+            </div>
         `;
-        console.log(dibujarAcompanantes);
-        pokemonDiv.querySelector('.select-companion-btn').
+
+        //Boton para eliminar o asignar acompanante, depende del argumento que se pase en dibuajrComoAcompanante
+        pokemonDiv.querySelector('#selectCompanionBtn').
         addEventListener('click', () => {
             if(dibujarComoAcompanante){
                 this.eliminarAcompanante(dibujarAcompanantes);
             } else {
                 this.seleccionarComoAcompanante(dibujarAcompanantes);
             }
+        });
+
+        //boton para el modal de asignar a entrenador
+        const botonAsignar = pokemonDiv.querySelector('#asignarAEntrenadorBtn')
+        //Se asigna el escuchador solo cuando botonAsignar no es null
+        botonAsignar && botonAsignar.addEventListener('click', () => {
+            this.mostrarModalAsignar(); // Llamar a la función mostrarModal al hacer clic en la tarjeta
         });
 
         //agregar evento de clic para mostrar el modal
@@ -200,6 +212,87 @@ class Pokemon {
             }
         };
     }
+    // Metodo para asignar pokemon a entrenador
+    mostrarModalAsignar() {
+        // Se obtienen los entrenadores
+        const entrenadores = JSON.parse(localStorage.getItem('entrenadores'))
+        // Se generan los elementos necesarios para el modal con sus respectivas clases
+        const modal = document.createElement('div');
+        modal.id = 'asignar-modal';
+        modal.classList.add('modal');
+        document.body.appendChild(modal);
+        const modalContent = document.createElement('div');
+        modalContent.classList.add('modal-content');
+        modal.appendChild(modalContent);
+        //Se genera el contenido del modal
+        modalContent.innerHTML = `
+        <div class="modal-header">
+            <h2>${"Asignar acompañante a entrenador"}</h2>
+            <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div>
+                Selecciona entrenador
+                <select id="selectAsignar">
+                ${entrenadores.map(entrenador => {
+                    //se generan los options a partir de los entrenadores que no tienen acompanante
+                    // se selecciona el primero por defecto
+                    if(!entrenador.acompanante){
+                        return `<option value="${entrenador.id}" ${entrenador.id === 1 ? "selected" : "" }>
+                            ${entrenador.nombre}
+                        </option>`
+                    }
+                }).join("")}
+                </select>
+            </div>
+            <button id="btnAsignar" class="select-companion-btn">Asignar</button>
+        </div>
+        `;
+        // Se le agrega color y se muestra el modal
+        modalContent.style.backgroundColor = "#000550";
+        modal.style.display = 'block';
+        // Se agrega un click a la equis del modal
+        modal.querySelector('#btnAsignar').addEventListener('click', () => {
+            this.asignarAcompananteAEntrenador(entrenadores,modal)
+        });
+        // Se agrega un click a la equis del modal
+        modal.querySelector('.close').addEventListener('click', () => {
+            document.body.removeChild(modal);
+        });
+        // Se agrega un click a la equis del modal
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                document.body.removeChild(modal);
+            }
+        };
+    }
+
+    // Metodo para agregar acompanante a entrenador
+    asignarAcompananteAEntrenador(entrenadores, modal) {
+        //Se obtiene el valor del select
+        const idEntrenador = document.getElementById("selectAsignar").value;
+        //Se verica si hay un entrenado que ya tenga el acompanante
+        const asigadoPreviamente = entrenadores.find(entrenador => entrenador?.acompanante?.numero === this.numero)
+        //Si se encuentra un entrenador con el mismo acompanante, no se asigna
+        if(asigadoPreviamente){
+            alert(`Error, el acompañante ya ha sido asignado a ${asigadoPreviamente.nombre}`)
+            return
+        }
+        // Se asigna el acompanante al entrenador
+        let nombreEntrenador = '' 
+        const nuevosEntrenadores = entrenadores.map(entrenador => {
+            if(entrenador.id === parseInt(idEntrenador)){
+                entrenador.acompanante = this
+                nombreEntrenador = entrenador.nombre
+            }
+            return entrenador
+        })
+        // Se guardan los entrenadores con los nuevos datos
+        localStorage.setItem('entrenadores', JSON.stringify(nuevosEntrenadores));
+        document.body.removeChild(modal)
+        alert(`El acompañante ${this.nombre} ha sido asignado con éxito a ${nombreEntrenador}`)
+    }
+
 }
 
 export default Pokemon; //exportar la clase Pokemon para ser utilizada

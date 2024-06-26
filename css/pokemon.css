@@ -2,6 +2,12 @@
 .pokemon-container{
     cursor: pointer;
 }
+
+.pokemon-buttons-container {
+    display: flex;
+    flex-direction: column;
+}
+
 .pokemon-card {
     border: 1px solid #ccc;
     background-color: #fff;
