@@ -114,7 +114,7 @@ class Pokemon {
         acompanantes.push(this);
         localStorage.setItem('acompanantes', JSON.stringify(acompanantes));
         alert(`${this.nombre} ha sido añadido como acompañante.`);
-        console.log(dibujarAcompanantes,this);
+
         // Redibujar la lista de acompañantes
         dibujarAcompanantes();
     }
