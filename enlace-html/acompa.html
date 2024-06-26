@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../img/poken.png" type="image/png">
-    <title>Pokédex</title>
+    <title>Lista de Acompañantes</title>
     <link rel="stylesheet" href="../css/acompa.css">
     <script src="../javaScript/main.js" type="module" ></script>
 </head>
@@ -14,39 +13,67 @@
         <nav>
             <ul class="nav_horizontal">
                 <li><a href="../index.html">Inicio</a></li>
-                <li>
-                    <a href="../enlace-html/pokemon.html">Pokédex</a>
-                    <ul class="nav_vertical">
-                        <li><a href="#" data-tipo="ver-todos">Ver todos</a></li>
-                        <li class="normal"><a href="#" data-tipo="normal">Normal</a></li>
-                        <li class="fire"><a href="#" data-tipo="fire">Fire</a></li>
-                        <li class="water"><a href="#" data-tipo="water">Water</a></li>
-                        <li class="grass"><a href="#" data-tipo="grass">Grass</a></li>
-                        <li class="electric"><a href="#" data-tipo="electric">Electric</a></li>
-                        <li class="ice"><a href="#" data-tipo="ice">Ice</a></li>
-                        <li class="fighting"><a href="#" data-tipo="fighting">Fighting</a></li>
-                        <li class="poison"><a href="#" data-tipo="poison">Poison</a></li>
-                        <li class="ground"><a href="#" data-tipo="ground">Ground</a></li>
-                        <li class="flying"><a href="#" data-tipo="flying">Flying</a></li>
-                        <li class="psychic"><a href="#" data-tipo="psychic">Psychic</a></li>
-                        <li class="bug"><a href="#" data-tipo="bug">Bug</a></li>
-                        <li class="rock"><a href="#" data-tipo="rock">Rock</a></li>
-                        <li class="ghost"><a href="#" data-tipo="ghost">Ghost</a></li>
-                        <li class="dark"><a href="#" data-tipo="dark">Dark</a></li>
-                        <li class="dragon"><a href="#" data-tipo="dragon">Dragon</a></li>
-                        <li class="steel"><a href="#" data-tipo="steel">Steel</a></li>
-                        <li class="fairy"><a href="#" data-tipo="fairy">Fairy</a></li>
-                    </ul>
-                </li>
+                <li><a href="../enlace-html/pokemon.html">Pokédex</a></li>
                 <li><a href="../enlace-html/acompa.html">Mis Acompañantes</a></li>
             </ul>
         </nav>
     </header>
-    <main>
-        <section id="Inicio"></section>
-        <section id="pokedex"></section>
-        <section id="acompañantes"></section>
-    </main>
-</body>
+
+    <div id="Inicio">
+        <div class="crud-container">
+            <h1>Lista de Acompañantes</h1>
+            <div id="acompañantes-container" class="acompañantes">
+                <!-- Aquí se insertarán dinámicamente las tarjetas de acompañantes -->
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="../javaScript/pokem.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const acompañantesContainer = document.getElementById('acompañantes-container');
+
+            if (acompañantesContainer) { // Verificamos si el elemento existe
+                acompañantesContainer.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('btn-eliminar')) {
+                        const index = e.target.getAttribute('data-index');
+                        let acompañantes = JSON.parse(localStorage.getItem('acompanantes')) || [];
+                        acompañantes.splice(index, 1);
+                        localStorage.setItem('acompanantes', JSON.stringify(acompañantes));
+                        mostrarAcompañantes();
+                    }
+                });
+
+                mostrarAcompañantes();
+            } else {
+                console.error('No se encontró el elemento #acompañantes-container');
+            }
+
+            function mostrarAcompañantes() {
+                if (acompañantesContainer) {
+                    acompañantesContainer.innerHTML = ''; // Limpiamos el contenedor
+
+                    const acompañantes = JSON.parse(localStorage.getItem('acompanantes')) || [];
+
+                    acompañantes.forEach((acompañante, index) => {
+                        const card = document.createElement('div');
+                        card.classList.add('acompañante-card');
+                        card.innerHTML = `
+                            <h3>${acompañante.nombre}</h3>
+                            <img src="${acompañante.imagen}" alt="${acompañante.nombre}">
+                            <p>Número: ${acompañante.numero}</p>
+                            <p>Tipo: ${acompañante.tipo.join(', ')}</p>
+                            <div class="acompañante-actions">
+                                <button class="btn-eliminar" data-index="${index}">Eliminar</button>
+                            </div>
+                        `;
+                        acompañantesContainer.appendChild(card);
+                    });
+                } else {
+                    console.error('No se puede mostrar acompañantes porque no se encontró #acompañantes-container');
+                }
+            }
+        });
+    </script>
 </body>
 </html>
