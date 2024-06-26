@@ -202,3 +202,17 @@
     background-color: black;
     color: white;
 }
+
+.select-companion-disabled {
+    background-color: #8b8b8b;
+    border: none;
+    color: rgb(74, 74, 74);
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 0;
+    cursor:not-allowed;
+    border-radius: 5px;
+}

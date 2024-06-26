@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     miPokedex.dibujarPokedex(); // Dibujar la Pokedex en el DOM
     miPokedex.dibujarAcompanantes(); // Dibuja los acompanantes
     miPokedex.agregarEntreadores(); // Agrega entrenadores
+    miPokedex.dibujarEntrenadores(); // Dibuja la sección de entrenadores
+
     // Manejar la navegación entre secciones
     const sectionLinks = document.querySelectorAll('nav a[data-section]');
     sectionLinks.forEach(link => {

@@ -6,6 +6,9 @@ body {
     padding: 0;
 }
 
+h2 {
+    text-align: center;
+}
 #inicio h2 {
     color: black; /* Color blanco para el texto */
     text-align:center;
@@ -231,7 +234,7 @@ nav a:hover {
     margin: 10px; /* Añadir margen entre las imágenes */
 }
 
-.pokedex, .acompanantes {
+.pokedex, .acompanantes, .entrenadores {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -265,4 +268,14 @@ option {
 
 .inactive {
     display: none;
+}
+
+.foto-entrenador {
+    border-radius: 50%;
+}
+
+.entrenador-contenedor{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }

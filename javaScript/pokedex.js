@@ -4,12 +4,12 @@ import Pokemon from "./pokem.js"; // Importar la clase Pokemon
 class Pokedex {
     constructor() {
         this.pokemons = []; // Inicializar un arreglo vacío para almacenar los Pokémon
-        this.entrenadores = [
-            {id: 1, nombre: "Isabel",acompanante:null},
-            {id: 2, nombre: "Dayna",acompanante:null},
-            {id: 3, nombre: "Osiris",acompanante:null},
-            {id: 4, nombre: "Vilma",acompanante:null},
-            {id: 5, nombre: "Katia",acompanante:null}
+        this.entrenadores = [ //Inicializa los entrenadores
+            {id: 1, nombre: "Isabel", foto: "https://avatars.githubusercontent.com/u/139247973?v=4", acompanante:null},
+            {id: 2, nombre: "Dayna", foto: "https://avatars.githubusercontent.com/u/94188953?v=4", acompanante:null},
+            {id: 3, nombre: "Osiris", foto: "https://avatars.githubusercontent.com/u/89263074?v=4", acompanante:null},
+            {id: 4, nombre: "Vilma", foto: "https://avatars.githubusercontent.com/u/167550716?v=4", acompanante:null},
+            {id: 5, nombre: "Katia", foto: "https://avatars.githubusercontent.com/u/100703979?v=4", acompanante:null}
         ]
     }
 
@@ -105,10 +105,74 @@ dibujarAcompanantes() {
         // Se crea el pokemon
         const pokemon = new Pokemon(numero, nombre, especie, altura, peso, tipo, habilidades, debilidades, stats, moves, imagen, sprites)
         //Se dibuja
-        const pokemonDiv = pokemon.dibujarPokemon(true,this.dibujarAcompanantes.bind(this)); //bind se usa para asegurar que la función dibujarAcompanantes siempre se ejecute con this apuntando al objeto de la clase Pokedex
+        const pokemonDiv = pokemon.dibujarPokemon(true,this.dibujarAcompanantes.bind(this),this.dibujarEntrenadores.bind(this)); //bind se usa para asegurar que la función dibujarAcompanantes siempre se ejecute con this apuntando al objeto de la clase Pokedex
         section.appendChild(pokemonDiv);
     });
 }
+
+dibujarEntrenador(entrenador) {
+    const entrenadorDiv = document.createElement('div');
+    let acompanante = undefined
+    if(entrenador.acompanante){
+        acompanante = entrenador.acompanante
+    }
+
+    entrenadorDiv.classList.add('pokemon-card'); //añadir clase para el css
+    // Aplicar el color de fondo
+    entrenadorDiv.style.backgroundColor = "#000550";
+    entrenadorDiv.innerHTML = `
+        <div class="pokemon-container">
+            <img class="foto-entrenador" src="${entrenador.foto}" alt="${entrenador.nombre}">
+            <h3>${entrenador.nombre}</h3>
+            <div class="entrenador-contenedor">
+                <p>
+                    ${acompanante ? `Acompañante Asigando:` : "Sin acompañante asignado"}
+                </p>
+                <img
+                    src="${acompanante ? acompanante.imagen : '../img/pokemon-desconocido.png'}"
+                    alt="${acompanante ? acompanante.nombre : ''}"
+                >
+                <button id="btnEliminarAsignado"  ${acompanante ? "class='select-companion-btn' " : "class='select-companion-disabled' disabled"} >Eliminar acompañante</button>
+            </div>
+        </div>
+    `;
+
+    entrenadorDiv.querySelector('#btnEliminarAsignado').addEventListener('click', () => {
+        this.eliminarAcompananteAEntrenador(entrenador.id)
+    });
+
+    return entrenadorDiv;
+}
+
+dibujarEntrenadores() {
+    const entrenadores = JSON.parse(localStorage.getItem('entrenadores')) || []
+    const entrenadoresSection = document.querySelector('.entrenadores');
+    entrenadoresSection.innerHTML = ''; // Limpiar el contenido existente
+    // 
+    entrenadores.forEach(entrenador => {
+        const entrenadorDiv = this.dibujarEntrenador(entrenador)
+        entrenadoresSection.appendChild(entrenadorDiv);
+    });
+}
+
+    // Metodo para eliminar pokemon acompanante, recibe el id del entrenador y funcion para redibujar los entrenadores
+    eliminarAcompananteAEntrenador(idEntrenador) {
+        //Se obtienen los entrenadores
+        const entrenadores = JSON.parse(localStorage.getItem('entrenadores')) || []
+        // Se elimina el acompanante del entrenador
+        let nombreEntrenador = '' 
+        const nuevosEntrenadores = entrenadores.map(entrenador => {
+            if(entrenador.id === parseInt(idEntrenador)){
+                entrenador.acompanante = null
+                nombreEntrenador = entrenador.nombre
+            }
+            return entrenador
+        })
+        // Se guardan los entrenadores con los nuevos datos
+        localStorage.setItem('entrenadores', JSON.stringify(nuevosEntrenadores));
+        this.dibujarEntrenadores()
+        this.dibujarAcompanantes()
+    }
 
 }
 
