@@ -45,7 +45,8 @@ class Pokemon {
 
     // Método para dibujar el Pokémon, recibe dibujarComoAcompanante que es un booleano y 
     // dibujarAcompanantes que es una funcion para volver a dibuajar los acompanantes cuaando se agregue/elimine acompanante
-    dibujarPokemon(dibujarComoAcompanante, dibujarAcompanantes,dibujarEntrenadores) {
+    // dibujarEntrenadores es una funcion para redibujar los entrenadores
+    dibujarPokemon(dibujarComoAcompanante, dibujarAcompanantes, dibujarEntrenadores) {
         //creando un div contenedor para la tarjeta
         const pokemonDiv = document.createElement('div');
         pokemonDiv.classList.add('pokemon-card');//añadir clase para el css
@@ -65,7 +66,7 @@ class Pokemon {
                 <button id="selectCompanionBtn" class="select-companion-btn">
                 ${dibujarComoAcompanante ? 'Eliminar acompañante' : 'Agregar acompañante'}
                 </button>
-                ${dibujarComoAcompanante && '<button id="asignarAEntrenadorBtn" class="select-companion-btn">Asignar a entrenador</button>'}
+                ${dibujarComoAcompanante ? '<button id="asignarAEntrenadorBtn" class="select-companion-btn">Asignar a entrenador</button>' : ''}
             </div>
         `;
 
@@ -83,7 +84,7 @@ class Pokemon {
         const botonAsignar = pokemonDiv.querySelector('#asignarAEntrenadorBtn')
         //Se asigna el escuchador solo cuando botonAsignar no es null
         botonAsignar && botonAsignar.addEventListener('click', () => {
-            this.mostrarModalAsignar(dibujarEntrenadores); // Llamar a la función mostrarModal al hacer clic en la tarjeta
+            this.mostrarModalAsignar(dibujarEntrenadores);
         });
 
         //agregar evento de clic para mostrar el modal
@@ -94,31 +95,44 @@ class Pokemon {
     }
 
     seleccionarComoAcompanante(dibujarAcompanantes) {
+        // Obtener la lista de acompañantes del localStorage
         const acompanantes = JSON.parse(localStorage.getItem('acompanantes')) || [];
+        
+        // Verificar si ya hay 6 acompañantes
         if (acompanantes.length >= 6) {
             alert('No puedes seleccionar más de 6 acompañantes.');
             return;
         }
-
+    
+        // Verificar si el Pokémon ya está en la lista de acompañantes
         if (acompanantes.find(pokemon => pokemon.numero === this.numero)) {
             alert(`${this.nombre} ya está en la lista de acompañantes.`);
             return;
         }
-
+    
+        // Añadir el Pokémon a la lista de acompañantes y guardar en localStorage
         acompanantes.push(this);
         localStorage.setItem('acompanantes', JSON.stringify(acompanantes));
         alert(`${this.nombre} ha sido añadido como acompañante.`);
-        dibujarAcompanantes()
+        console.log(dibujarAcompanantes,this);
+        // Redibujar la lista de acompañantes
+        dibujarAcompanantes();
     }
-
-    eliminarAcompanante(dibujarAcompanantes){
+    
+    eliminarAcompanante(dibujarAcompanantes) {
+        // Obtener la lista de acompañantes del localStorage
         let acompanantes = JSON.parse(localStorage.getItem('acompanantes')) || [];
-
-        acompanantes = acompanantes.filter(pokemon => pokemon.numero !== this.numero)
-
+    
+        // Filtrar la lista para eliminar el acompañante actual
+        acompanantes = acompanantes.filter(pokemon => pokemon.numero !== this.numero);
+    
+        // Guardar la lista actualizada en el localStorage
         localStorage.setItem('acompanantes', JSON.stringify(acompanantes));
-        dibujarAcompanantes()
+        
+        // Redibujar la lista de acompañantes
+        dibujarAcompanantes();
     }
+    
 
     // Método para mostrar el modal con información detallada
     mostrarModal() {
@@ -278,12 +292,10 @@ class Pokemon {
             alert(`Error, el acompañante ya ha sido asignado a ${asigadoPreviamente.nombre}`)
             return
         }
-        // Se asigna el acompanante al entrenador
-        let nombreEntrenador = '' 
+
         const nuevosEntrenadores = entrenadores.map(entrenador => {
             if(entrenador.id === parseInt(idEntrenador)){
                 entrenador.acompanante = this
-                nombreEntrenador = entrenador.nombre
             }
             return entrenador
         })

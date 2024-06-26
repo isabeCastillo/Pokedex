@@ -59,7 +59,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         pokedexSection.innerHTML = ''; // Limpiar el contenido de la Pokedex antes de mostrar todos los Pokémon
 
         miPokedex.pokemons.forEach(pokemon => {
-            const pokemonDiv = pokemon.dibujarPokemon(); // Dibujar la tarjeta del Pokémon
+             // Dibujar la tarjeta del Pokémon
+            const pokemonDiv = pokemon.dibujarPokemon(false, miPokedex.dibujarAcompanantes.bind(miPokedex), miPokedex.dibujarEntrenadores.bind(miPokedex));
             pokedexSection.appendChild(pokemonDiv); // Añadir la tarjeta a la Pokedex
         });
     }
@@ -74,7 +75,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         pokedexSection.innerHTML = ''; // Limpiar el contenido de la Pokedex antes de mostrar los Pokémon filtrados
 
         pokemonFiltrados.forEach(pokemon => {
-            const pokemonDiv = pokemon.dibujarPokemon(); // Dibujar la tarjeta del Pokémon filtrado
+            // Dibujar la tarjeta del Pokémon filtrado
+            const pokemonDiv = pokemon.dibujarPokemon(false, miPokedex.dibujarAcompanantes.bind(miPokedex), miPokedex.dibujarEntrenadores.bind(miPokedex));
             pokedexSection.appendChild(pokemonDiv); // Añadir la tarjeta a la Pokedex
         });
     }

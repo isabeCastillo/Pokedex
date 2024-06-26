@@ -120,6 +120,7 @@ dibujarEntrenador(entrenador) {
     entrenadorDiv.classList.add('pokemon-card'); //añadir clase para el css
     // Aplicar el color de fondo
     entrenadorDiv.style.backgroundColor = "#000550";
+    //aqui es utilizan los ternarios para asegurarse que renderizar en caso de no tener acompanante
     entrenadorDiv.innerHTML = `
         <div class="pokemon-container">
             <img class="foto-entrenador" src="${entrenador.foto}" alt="${entrenador.nombre}">
