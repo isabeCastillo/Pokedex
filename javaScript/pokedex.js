@@ -74,7 +74,7 @@ class Pokedex {
 
         // Iterar sobre cada Pokémon y añadir su representación HTML a la Pokedex
         this.pokemons.forEach(pokemon => {
-            const pokemonDiv = pokemon.dibujarPokemon();
+            const pokemonDiv = pokemon.dibujarPokemon(false,this.dibujarAcompanantes.bind);
             pokedexSection.appendChild(pokemonDiv);
         });
     }

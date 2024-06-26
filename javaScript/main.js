@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     miPokedex.dibujarAcompanantes(); // Dibuja los acompanantes
 
     // Manejar la navegación entre secciones
-    function setupSectionLinks() {
+    
         const sectionLinks = document.querySelectorAll('nav a[data-section]');
         sectionLinks.forEach(link => {
             link.addEventListener('click', (event) => {
@@ -19,68 +19,67 @@ document.addEventListener('DOMContentLoaded', async () => {
                 showSection(sectionId); // Mostrar la sección correspondiente
             });
         });
-    }
 
-    function mostrarTodosLosPokemon() {
+    // Manejar el clic en el enlace "Ver todos"
+    const verTodosLink = document.getElementById('ver-todos');
+    verTodosLink && verTodosLink.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevenir el comportamiento por defecto del enlace
+        showSection('pokedex'); // Mostrar la sección de la Pokedex
+        mostrarTodosLosPokemon(); // Mostrar todos los Pokémon
+    });
+
+    // Manejar el clic en las etiquetas de tipo de Pokémon
+    const tipoLinks = document.querySelectorAll('.nav_vertical li a[data-tipo]');
+    tipoLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevenir el comportamiento por defecto del enlace
+            const tipo = event.target.getAttribute('data-tipo'); // Obtener el tipo de Pokémon a filtrar
+            showSection('pokedex'); // Mostrar la sección de la Pokedex
+            filtrarPorTipo(tipo); // Filtrar los Pokémon por tipo
+        });
+    });
+    
+    // Función para mostrar una sección y ocultar las otras
+    function showSection(sectionId) {
+    const sections = document.querySelectorAll('main section');
+    sections.forEach(section => {
+
+         // Ocultar todas las secciones
+        section.classList.remove('active');
+        section.classList.add('inactive');
+    });
+    const targetSection = document.getElementById(sectionId);
+    if (targetSection) {
+        targetSection.classList.remove('inactive');
+        targetSection.classList.add('active'); // Mostrar la sección objetivo
+    }
+ } 
+    // Función para mostrar todos los Pokémon
+    function mostrarTodosLosPokemon(){
         const pokedexSection = document.getElementById('pokedex');
-        pokedexSection.innerHTML = '';
+        pokedexSection.innerHTML = '';//limpiar el contenido de la Pokedex antes de mostrar todos los pokemon 
 
         miPokedex.pokemons.forEach(pokemon => {
-            const pokemonDiv = pokemon.dibujarPokemon();
-            pokedexSection.appendChild(pokemonDiv);
+            const pokemonDiv = pokemon.dibujarPokemon();//dibujar la tarjeta del pokemon 
+            pokedexSection.appendChild(pokemonDiv);//añadir la tarjeta a la pokedex
         });
     }
 
-    function setupVerTodosLink() {
-        const verTodosLink = document.getElementById('ver-todos');
-        if (verTodosLink) {
-            verTodosLink.addEventListener('click', (event) => {
-                event.preventDefault();
-                showSection('pokedex');
-                mostrarTodosLosPokemon();
-            });
-        }
-    }
-
-    function setupTipoLinks() {
-        const tipoLinks = document.querySelectorAll('.nav_vertical li a[data-tipo]');
-        tipoLinks.forEach(link => {
-            link.addEventListener('click', (event) => {
-                event.preventDefault();
-                const tipo = event.target.getAttribute('data-tipo');
-                showSection('pokedex');
-                filtrarPorTipo(tipo);
-            });
-        });
-    }
-
-    function showSection(sectionId) {
-        const sections = document.querySelectorAll('main section');
-        sections.forEach(section => {
-            section.classList.remove('active');
-        });
-        const targetSection = document.getElementById(sectionId);
-        if (targetSection) {
-            targetSection.classList.add('active');
-        }
-    }
-
+    // Función para filtrar y mostrar Pokémon por tipo
     function filtrarPorTipo(tipo) {
         const pokemonFiltrados = miPokedex.pokemons.filter(pokemon => {
-            return pokemon.tipo.includes(tipo.toLowerCase());
+            return pokemon.tipo.includes(tipo.toLowerCase()); // Filtrar los Pokémon por tipo
         });
 
-        const pokedexSection = document.getElementById('pokedex');
-        pokedexSection.innerHTML = '';
+        const pokedexSection = document.querySelector('.pokedex');
+        pokedexSection.innerHTML = ''; // Limpiar el contenido de la Pokedex antes de mostrar los Pokémon filtrados
 
         pokemonFiltrados.forEach(pokemon => {
-            const pokemonDiv = pokemon.dibujarPokemon();
-            pokedexSection.appendChild(pokemonDiv);
+            const pokemonDiv = pokemon.dibujarPokemon(); // Dibujar la tarjeta del Pokémon filtrado
+            pokedexSection.appendChild(pokemonDiv); // Añadir la tarjeta a la Pokedex
         });
     }
 
-    setupSectionLinks();
-    setupVerTodosLink();
-    setupTipoLinks();
-
+    // Mostrar la sección de inicio al cargar la página
+    showSection('inicio');
 });
