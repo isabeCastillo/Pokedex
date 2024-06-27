@@ -34,7 +34,6 @@ class Pokemon {
             rock: '#B6A136',
             ghost: '#735797',
             dragon: '#6F35FC',
-            dark: '#705746',
             steel: '#B7B7CE',
             fairy: '#D685AD',
         };

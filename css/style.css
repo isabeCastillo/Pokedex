@@ -194,6 +194,7 @@ nav a:hover {
 
 .nav_vertical li a:hover {
     background-color: inherit; /* Hereda el color de fondo del elemento li */
+    transform: scale(1.15);
 }
 
 

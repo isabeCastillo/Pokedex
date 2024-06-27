@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Acompañantes</title>
-    <link rel="stylesheet" href="../css/acompa.css">
     <script src="../javaScript/main.js" type="module" ></script>
 </head>
 <body>
@@ -18,7 +17,6 @@
             </ul>
         </nav>
     </header>
-
     <div id="Inicio">
         <div class="crud-container">
             <h1>Lista de Acompañantes</h1>
@@ -27,53 +25,6 @@
             </div>
         </div>
     </div>
-
     <script type="module" src="../javaScript/pokem.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const acompañantesContainer = document.getElementById('acompañantes-container');
-
-            if (acompañantesContainer) { // Verificamos si el elemento existe
-                acompañantesContainer.addEventListener('click', (e) => {
-                    if (e.target.classList.contains('btn-eliminar')) {
-                        const index = e.target.getAttribute('data-index');
-                        let acompañantes = JSON.parse(localStorage.getItem('acompanantes')) || [];
-                        acompañantes.splice(index, 1);
-                        localStorage.setItem('acompanantes', JSON.stringify(acompañantes));
-                        mostrarAcompañantes();
-                    }
-                });
-
-                mostrarAcompañantes();
-            } else {
-                console.error('No se encontró el elemento #acompañantes-container');
-            }
-
-            function mostrarAcompañantes() {
-                if (acompañantesContainer) {
-                    acompañantesContainer.innerHTML = ''; // Limpiamos el contenedor
-
-                    const acompañantes = JSON.parse(localStorage.getItem('acompanantes')) || [];
-
-                    acompañantes.forEach((acompañante, index) => {
-                        const card = document.createElement('div');
-                        card.classList.add('acompañante-card');
-                        card.innerHTML = `
-                            <h3>${acompañante.nombre}</h3>
-                            <img src="${acompañante.imagen}" alt="${acompañante.nombre}">
-                            <p>Número: ${acompañante.numero}</p>
-                            <p>Tipo: ${acompañante.tipo.join(', ')}</p>
-                            <div class="acompañante-actions">
-                                <button class="btn-eliminar" data-index="${index}">Eliminar</button>
-                            </div>
-                        `;
-                        acompañantesContainer.appendChild(card);
-                    });
-                } else {
-                    console.error('No se puede mostrar acompañantes porque no se encontró #acompañantes-container');
-                }
-            }
-        });
-    </script>
 </body>
 </html>

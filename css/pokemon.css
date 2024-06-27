@@ -1,3 +1,6 @@
+body {
+    cursor: pointer;
+}
 /*diseño de carta del pokemon incial*/
 .pokemon-container{
     cursor: pointer;
