@@ -5,8 +5,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     const miPokedex = new Pokedex(); // Crear una nueva instancia de Pokedex
     await miPokedex.obtenerTodosLosPokemon(); // Obtener todos los Pokémon y añadirlos a la Pokedex
     miPokedex.dibujarPokedex(); // Dibujar la Pokedex en el DOM
-    miPokedex.dibujarAcompanantes(); // Dibuja los acompanantes
-    miPokedex.agregarEntreadores(); // Agrega entrenadores
+    await miPokedex.inicializarIndexedDB(); // Inicializar IndexedDB
+    await miPokedex.agregarEntrenadores(); // Agregar entrenadores a IndexedDB si no existen
+    miPokedex.dibujarAcompanantes(); // Dibuja los acompañantes
     miPokedex.dibujarEntrenadores(); // Dibuja la sección de entrenadores
 
     // Manejar la navegación entre secciones
@@ -60,7 +61,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         miPokedex.pokemons.forEach(pokemon => {
              // Dibujar la tarjeta del Pokémon
-            const pokemonDiv = pokemon.dibujarPokemon(false, miPokedex.dibujarAcompanantes.bind(miPokedex), miPokedex.dibujarEntrenadores.bind(miPokedex));
+            const pokemonDiv = pokemon.dibujarPokemon(false);
             pokedexSection.appendChild(pokemonDiv); // Añadir la tarjeta a la Pokedex
         });
     }
@@ -76,7 +77,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         pokemonFiltrados.forEach(pokemon => {
             // Dibujar la tarjeta del Pokémon filtrado
-            const pokemonDiv = pokemon.dibujarPokemon(false, miPokedex.dibujarAcompanantes.bind(miPokedex), miPokedex.dibujarEntrenadores.bind(miPokedex));
+            const pokemonDiv = pokemon.dibujarPokemon(false);
             pokedexSection.appendChild(pokemonDiv); // Añadir la tarjeta a la Pokedex
         });
     }
