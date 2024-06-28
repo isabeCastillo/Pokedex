@@ -18,7 +18,7 @@ Este proyecto consiste en una Pokédex donde se meustra la informacion general d
 
 - Cada entrenador cuenta con un boton el cual podra eliminar el acompañante asignado cuando lo desee.
 
-# Herramientas utilizadas
+# Tecnologia utilizada
 - Html
 
 <img src="https://img.icons8.com/?size=100&id=20909&format=png&color=000000" alt="Html">
@@ -31,7 +31,7 @@ Este proyecto consiste en una Pokédex donde se meustra la informacion general d
 
 <img src="https://img.icons8.com/?size=100&id=OYtQZVEC3jED&format=png&color=000000" alt="css">
 
-- PokeApi
+- Api consumida desde la PokeApi
 
 <img src="https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png" alt="Html">
 
