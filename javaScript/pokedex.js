@@ -13,16 +13,7 @@ class Pokedex {
         ]
     }
 
-    async obtenerTodosLosPokemon() {
-        try {
-            //Iterar del 1 al 150 para obtener cada Pokémon por su ID
-            for (let id = 1; id <= 150; id++) {
-                await this.obtenerInfoPokemonPorId(id);
-            }
-        } catch (error) {
-            console.error('Error al obtener datos de Pokemon:', error);//permite manejar los errores
-        }
-    }
+    
     
     // Nuevo método para obtener información de un Pokémon por su ID
     async obtenerInfoPokemonPorId(id) {
@@ -54,6 +45,16 @@ class Pokedex {
 
         } catch (error) {
             console.error(`Error al obtener datos de Pokemon con ID ${id}:`, error); // Manejar errores de la solicitud
+        }
+    }
+    async obtenerTodosLosPokemon() {
+        try {
+            //Iterar del 1 al 150 para obtener cada Pokémon por su ID
+            for (let id = 1; id <= 150; id++) {
+                await this.obtenerInfoPokemonPorId(id);
+            }
+        } catch (error) {
+            console.error('Error al obtener datos de Pokemon:', error);//permite manejar los errores
         }
     }
 
