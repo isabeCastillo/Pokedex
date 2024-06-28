@@ -43,17 +43,17 @@ class Pokemon {
     }
 
     // Método para dibujar el Pokémon, recibe dibujarComoAcompanante que es un booleano y 
-    // dibujarAcompanantes que es una funcion para volver a dibuajar los acompanantes cuaando se agregue/elimine acompanante
+    // dibujarAcompanantes que es una funcion para volver a dibuajar los acompanantes cuando se agregue/elimine acompanante
     // dibujarEntrenadores es una funcion para redibujar los entrenadores
     dibujarPokemon(dibujarComoAcompanante, dibujarAcompanantes, dibujarEntrenadores) {
         //creando un div contenedor para la tarjeta
         const pokemonDiv = document.createElement('div');
         pokemonDiv.classList.add('pokemon-card');//añadir clase para el css
         // Aplicar el color de fondo según el tipo
-        const tipoColor = this.obtenerColorDeTipo();
-        pokemonDiv.style.backgroundColor = tipoColor;
+        const tipoColor = this.obtenerColorDeTipo(); //obtiene el color del tipo del Pokemon utilizando el metodo obtenerColorDeTipo()
+        pokemonDiv.style.backgroundColor = tipoColor; //asigna el color de fonfo al elemento div basado en el tipo de pokemon
 
-        //Este es el html de la tarjeta, se muestra la imagen, el nombre y el tipo del pokemon
+        //Este es el html de la tarjeta, se muestra la imagen, el nombre , numero y el tipo del pokemon
         pokemonDiv.innerHTML = `
             <div class="pokemon-container">
                 <img src="${this.imagen}" alt="${this.nombre}">
@@ -70,7 +70,7 @@ class Pokemon {
         `;
 
         //Boton para eliminar o asignar acompanante, depende del argumento que se pase en dibuajrComoAcompanante
-        pokemonDiv.querySelector('#selectCompanionBtn').
+        pokemonDiv.querySelector('#selectCompanionBtn'). //añade un event listener al boton dentro de pokemonDiv con id selectCompanionBtn
         addEventListener('click', () => {
             if(dibujarComoAcompanante){
                 this.eliminarAcompanante(dibujarAcompanantes);
@@ -80,7 +80,7 @@ class Pokemon {
         });
 
         //boton para el modal de asignar a entrenador
-        const botonAsignar = pokemonDiv.querySelector('#asignarAEntrenadorBtn')
+        const botonAsignar = pokemonDiv.querySelector('#asignarAEntrenadorBtn')// Selecciona el botón para asignar a entrenador si dibujarComoAcompanante es true.
         //Se asigna el escuchador solo cuando botonAsignar no es null
         botonAsignar && botonAsignar.addEventListener('click', () => {
             this.mostrarModalAsignar(dibujarEntrenadores);
@@ -92,37 +92,37 @@ class Pokemon {
         });
         return pokemonDiv; //Retornar el div contenedor completo
     }
-
+    //metodo que maneja la logica para seleccionar un pokemon como acompañante
     seleccionarComoAcompanante(dibujarAcompanantes) {
         // Obtener la lista de acompañantes del localStorage
-        const acompanantes = JSON.parse(localStorage.getItem('acompanantes')) || [];
+        const acompanantes = JSON.parse(localStorage.getItem('acompanantes')) || []; //Obtiene la lista de acompañantes desde el localStorage o inicializa un array vacío si no hay ninguno
         
-        // Verificar si ya hay 6 acompañantes
+        // Verificar si ya hay 6 acompañantes y muestra una alerta
         if (acompanantes.length >= 6) {
             alert('No puedes seleccionar más de 6 acompañantes.');
             return;
         }
     
         // Verificar si el Pokémon ya está en la lista de acompañantes
-        if (acompanantes.find(pokemon => pokemon.numero === this.numero)) {
-            alert(`${this.nombre} ya está en la lista de acompañantes.`);
+        if (acompanantes.find(pokemon => pokemon.numero === this.numero)) {//Verifica si el Pokémon ya está en la lista de acompañantes y muestra una alerta si es así.
+            alert(`${this.nombre} ya está en la lista de acompañantes.`);//Muestra una alerta indicando que el Pokémon ha sido añadido como acompañante.
             return;
         }
     
         // Añadir el Pokémon a la lista de acompañantes y guardar en localStorage
-        acompanantes.push(this);
-        localStorage.setItem('acompanantes', JSON.stringify(acompanantes));
+        acompanantes.push(this);//Añade el Pokémon actual (this) a la lista de acompañantes
+        localStorage.setItem('acompanantes', JSON.stringify(acompanantes));//Guarda la lista actualizada de acompañantes en el localStorage
         alert(`${this.nombre} ha sido añadido como acompañante.`);
 
         // Redibujar la lista de acompañantes
-        dibujarAcompanantes();
+        dibujarAcompanantes();//Llama a la función dibujarAcompanantes para redibujar la lista de acompañantes y reflejar los cambios realizados.
     }
-    
+    //Método que maneja la lógica para eliminar un Pokémon de la lista de acompañantes.
     eliminarAcompanante(dibujarAcompanantes) {
-        // Obtener la lista de acompañantes del localStorage
+        // Obtiene la lista de acompañantes del localStorage o inicializa un array vacío si no hay ninguno.
         let acompanantes = JSON.parse(localStorage.getItem('acompanantes')) || [];
     
-        // Filtrar la lista para eliminar el acompañante actual
+        // Filtra la lista para eliminar el acompañante actual
         acompanantes = acompanantes.filter(pokemon => pokemon.numero !== this.numero);
     
         // Guardar la lista actualizada en el localStorage
@@ -135,8 +135,10 @@ class Pokemon {
 
     // Método para mostrar el modal con información detallada
     mostrarModal() {
+        //Intenta obtener el modal del DOM por su id pokemon-modal.
         let modal = document.getElementById('pokemon-modal');
-        if (!modal) {
+        //Si el modal no existe, crea un nuevo elemento div con el id pokemon-modal
+        if (!modal) { 
             modal = document.createElement('div');
             modal.id = 'pokemon-modal';
             modal.classList.add('modal');
@@ -146,8 +148,10 @@ class Pokemon {
             modalContent.classList.add('modal-content');
             modal.appendChild(modalContent);
         }
+        //Obtiene el color del tipo del Pokémon utilizando el método obtenerColorDeTipo().
         const tipoColor = this.obtenerColorDeTipo();
         const modalContent = modal.querySelector('.modal-content');
+        //define el contenido HTML del modal
         modalContent.innerHTML = `
             <div class="modal-header">
                 <h2>${this.nombre}</h2>
@@ -195,13 +199,15 @@ class Pokemon {
                 </div>
             </div>
         `;
+        //Asigna el color de fondo del modal basado en el tipo del Pokémon.
         modalContent.style.backgroundColor = tipoColor;
-        modal.style.display = 'block';
+        modal.style.display = 'block'; //Muestra el modal al establecer su estilo display a block.
 
         // Event listeners para navegación del modal
         const navButtons = modal.querySelectorAll('.nav-button');
         const sections = modal.querySelectorAll('.modal-section');
-
+        
+        //Agrega event listeners a los botones de navegación del modal para alternar entre las diferentes secciones (Sobre, Stats, Moves).
         navButtons.forEach(button => {
             button.addEventListener('click', () => {
                 // Remover la clase 'active' de todas las secciones y botones
@@ -214,11 +220,11 @@ class Pokemon {
                 document.getElementById(sectionId).classList.add('active');
             });
         });
-
+        //agrega un event listener al botón de cierre del modal para ocultarlo al hacer clic en la equis (X).
         modal.querySelector('.close').addEventListener('click', () => {
             modal.style.display = 'none';
         });
-
+        //Agrega un event listener para cerrar el modal si se hace clic fuera de él.
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = 'none';
@@ -292,16 +298,16 @@ class Pokemon {
             return
         }
 
-        const nuevosEntrenadores = entrenadores.map(entrenador => {
+        const nuevosEntrenadores = entrenadores.map(entrenador => {//Crea un nuevo array de entrenadores (nuevosEntrenadores) donde se actualiza el campo acompanante del entrenador seleccionado con el Pokémon actual (this).
             if(entrenador.id === parseInt(idEntrenador)){
                 entrenador.acompanante = this
             }
             return entrenador
         })
         // Se guardan los entrenadores con los nuevos datos
-        localStorage.setItem('entrenadores', JSON.stringify(nuevosEntrenadores));
-        document.body.removeChild(modal)
-        dibujarEntrenadores()
+        localStorage.setItem('entrenadores', JSON.stringify(nuevosEntrenadores));//Guarda la lista actualizada de entrenadores en el localStorage.
+        document.body.removeChild(modal)//Remueve el modal del DOM.
+        dibujarEntrenadores()//Llama a la función dibujarEntrenadores para actualizar la interfaz con los cambios realizados.
     }
 
 }
