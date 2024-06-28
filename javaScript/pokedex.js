@@ -13,7 +13,7 @@ class Pokedex {
         ]
         this.db = null; // Inicializar la referencia a IndexedDB
     }
-    //Itera del Pokémon 1 al 150 y llama a obtenerInfoPokemonPorId(id) para obtener la información de cada uno.
+
     async obtenerTodosLosPokemon() {
         try {
             //Iterar del 1 al 150 para obtener cada Pokémon por su ID
@@ -62,7 +62,6 @@ class Pokedex {
     }
 
 // Método para obtener las debilidades de un Pokémon según su tipo
-// Método para obtener las debilidades de un Pokémon según su tipo
 //Obtiene las debilidades de los tipos de Pokémon especificados consultando la PokeAPI.
 //Utiliza un Set para evitar duplicados y devuelve un arreglo de debilidades.
 async obtenerDebilidades(tipos) {
@@ -77,7 +76,6 @@ async obtenerDebilidades(tipos) {
 
 // Método para agregar un Pokémon al arreglo de pokemons
 //agregarPokemon(pokemon): Agrega un Pokémon al arreglo pokemons.
-//agregarEntreadores(): Almacena los entrenadores en el localStorage si no existen ya.
 agregarPokemon(pokemon) {
     this.pokemons.push(pokemon);
 }
@@ -169,7 +167,6 @@ async obtenerEntrenadores() {
 
 // Método para dibujar la Pokedex en el elemento HTML con clase 'pokedex'
 //dibujarPokedex(): Renderiza los Pokémon en el elemento HTML con clase pokedex.
-//dibujarAcompanantes(): Renderiza los acompañantes en el elemento HTML con clase acompanantes, obtenidos del localStorage
 dibujarPokedex() {
     const pokedexSection = document.querySelector('.pokedex');
     pokedexSection.innerHTML = ''; // Limpiar el contenido existente
@@ -196,7 +193,7 @@ dibujarAcompanantes() {
         section.appendChild(pokemonDiv);
     });
 }
-//dibujarEntrenador(entrenador): Crea y retorna un elemento HTML que representa visualmente a un entrenador, con opción de mostrar su acompañante y un botón para eliminarlo.
+
 dibujarEntrenador(entrenador) {
     const entrenadorDiv = document.createElement('div');
     let acompanante = undefined
